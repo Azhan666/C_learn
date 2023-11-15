@@ -744,4 +744,303 @@ ChatGPT
 //23
 //真垃圾，23岁了编程技术还这么菜！
 
+// 强制类型转换：
+//int main(){
+//
+//    int a = (int)3.14; // 将3.14强制转换为整型
+//    printf("%d",a);
+//
+//    return 0;
+//}
+//// 结果：
+//// 3
 
+// 赋值运算符和相等的区别：
+//int main(){
+//
+//    int a = 10;
+//    if (a = 3)
+//    {
+//        printf("这是赋值\n");
+//    }
+//    if (a == 3)
+//    {
+//        printf("这是相等\n");
+//    }
+//    return 0;
+//}
+
+// 逻辑与与逻辑或：&&:“并且”、||：“或者”
+
+//int main(){
+//
+//    int a = 0,b = 1; // 0为假，非0为真
+//    if(a && b)
+//    {
+//        printf("条件不成立，必须都为真！\n");
+//    }
+//    if(a || b)
+//    {
+//        printf("条件成立，有真就行！");
+//    }
+//
+//    return 0;
+//}
+////条件成立，有真就行！
+
+// 三目操作符：有三个操作数（类似于python中的三目运算符）
+
+//int main(){
+//
+//    int a = 10,b = 20;
+//    int r = a > b ? a : b; // 如果a大于b：是，则为a,否，则为b
+//
+//    printf("%d\n",r); // a>b为否，应该输出b
+//
+//    return 0;
+//}
+//// 结果符合预期：
+//// 20
+
+// 常见关键字：
+//auto: 自动创建变量、自动销毁变量,默认省略
+
+//int main(){
+//
+//    auto int a = 10,b = 20; // 自动创建变量ab(auto默认省略)
+//    return 0;
+//} // 销毁变量ab
+
+// break: 跳出循环，和py一样，常和for、while、do while搭配
+
+// case：和switch搭配，switch语句是一种常用的流程控制语句。
+// 它的作用是根据一个表达式的值，判断其是否等于一系列常量值中的任意一个，
+// 并执行相应的代码块，需要注意的是，在每个case关键字的语句序列中必须包含break语句。
+// break语句用于跳出switch语句，使程序执行流程跳转到switch语句后面的下一条语句。
+// 如果不加break语句，程序将继续执行下一个case语句，直到遇到break语句
+// 或switch语句结束为止。
+// 参考链接：https://baijiahao.baidu.com/s?id=1760498396078786457&wfr=spider&for=pc
+
+//当你学习C语言的switch语句时，你实际上是在学习一种用于多分支条件控制的结构。
+//switch语句允许你基于一个表达式的值来选择执行不同的代码块。
+//以下是switch语句的基本结构：
+//switch (expression) {
+//    case constant1:
+//        // 代码块1
+//        break;
+//    case constant2:
+//        // 代码块2
+//        break;
+//       // 更多的case语句
+//    default:
+//    // 如果expression的值不匹配任何一个case时执行的代码
+//}
+
+//这里是一些关于switch语句的重要点：
+//表达式（expression）：
+// switch语句中的表达式是一个整数表达式（可以是变量或常量）。
+// switch将会比较这个表达式的值与case语句中的常量值。
+//case语句：
+// 每个case标签后面跟着一个常量值。如果表达式的值等于某个case的常量值，程序将会执行对应的代码块。
+//
+//break语句：
+// 在每个case的代码块末尾都有一个break语句，它用于终止switch语句。
+// 如果忘记写break，程序将会继续执行下一个case中的代码，
+// 直到遇到break或switch语句结束。
+//
+//default语句： default标签是可选的，用于处理switch表达式的值与
+// 任何case都不匹配的情况。它类似于else语句中的内容。
+//
+//下面是一个简单的例子，演示了switch语句的基本用法：
+//#include <stdio.h>
+
+//int main() {
+//    int choice; // 创建一个接收用户输入的变量choice（选则）
+//
+//    printf("Enter a number (1-3): ");
+//    scanf("%d", &choice);
+//
+//    switch (choice) { // 跟据输入使用switch case语句执行不同的代码块
+//        case 1:
+//            printf("You chose One.\n");
+//            break;
+//        case 2:
+//            printf("You chose Two.\n");
+//            break;
+//        case 3:
+//            printf("You chose Three.\n");
+//            break;
+//        default:
+//            printf("Invalid choice.\n"); // 输入的内容非1-3
+//    }
+//
+//    return 0;
+//}
+// 这个例子中，用户输入一个数字，程序根据输入的数字输出相应的信息。
+// 如果输入的数字不是1、2或3，则输出"无效的选则"。
+
+// 下面自己尝试：
+
+//int main(){
+//
+//    int choice; // 创建一个变量接受用户输入，申请内存存放输入
+//
+//    // 使用printf提示用户进行输入
+//    printf("请输入你的年龄：(1-100)");
+//
+//    // 使用scanf()扫描，告知内存地址
+//    scanf("%d",&choice);
+//
+//    // 使用switch case表达式输出不同信息
+//    switch (choice) { // choice接收输入，表达式就是choice
+//        case 1: // 输入的内容就是case的表达式
+//            printf("太棒啦，1岁就会玩电脑啦！");
+//            break; // 使用break关键字退出代码块
+//
+//        case 100:
+//            printf("太棒啦，100岁了还能玩电脑！");
+//            break;
+//
+//        case 23:
+//            printf("真垃圾，23岁了编程技术还这么菜！");
+//            break;
+//
+//        default: // 使用default输出默认信息
+//            printf("不行啊，多大了还不会编程！");
+//    }
+//
+//    return 0;
+//}
+// 测试用例：结果符合预期
+//23
+//真垃圾，23岁了编程技术还这么菜！
+
+// 关键字：typedef:类型定义:声明一个别名的类型：“给太长的类型名取别名，
+// 类似于py的as”
+
+//typedef unsigned int uint; // ②使用typedef给unsigned int取个别名叫uint吧！
+//
+//int main(){
+//
+//    unsigned int num = 0; // ①不使用typedef，unsigned int这个类型太长啦
+//    uint num2 = 1; // 这样就可以直接使用uint来定义 unsigned int类型啦！
+//
+//    return 0;
+//}
+
+// 在数据将结构中常常见到typedef来定义结构体类型：
+
+// ①数据结构中定义一个链表的节点：
+//struct Node // 1.创建结构体类型的变量
+//typedef struct Node // ②使用类型定义给struct Node取别名叫Node
+//{
+//    int data;
+//    struct Node* next;
+//}Node; // 使用类型定义给struct Node取别名叫Node
+//
+//
+//int main(){
+//
+//    struct Node n; // 2.使用结构体类型变量创建n
+//    Node n2; // 3.取别名为Node后，直接使用别名即可创建结构体变量n2
+//
+//    return 0;
+//}
+
+// 关键字static：修饰局部变量、全局变量、函数
+
+//int count = 0; // 增加一个计数器来统计函数被调用的次数
+//void test() // 定义一个无返回值的函数test()
+//{
+//    static int a = 1; // ⭐② 使用关键字static修饰后，局部变量的作用域变为
+//                      // 整个源文件，除了作用域也不会被销毁，
+//                     // 此时a的值可以被保留而随着循环调用自增至11
+//                     // 参考链接：https://baijiahao.baidu.com/s?id=1761862740466600473&wfr=spider&for=pc
+//                    // ps：static本质上改变了变量的存储位置，将变量由栈区挪到了静态区，
+//                    // 所以变量不会被销毁，从而影响了其作用域
+//    a++;
+//    count++; // 累加器统计test被调用次数
+//    printf("a的值为：%d\n",a);
+//    printf("test函数被调用的第：%d次\n",count);
+//
+//}
+//
+//int main(){
+//
+//    int i = 0;
+//    while (i < 10)
+//    {
+//        test(); // 调用函数test()
+//        i++;
+//    }
+//
+//    return 0;
+//}
+// 结果：结合debug可知，由于主函数中，循环体每执行一次就调用一次test函数，
+//      调用完之后⭐a就被销毁了（局部变量出了作用域），下一次调用时a是重新创建的，
+//      因此a每次只能自增一次，所以每次a的值为2，
+//      共循环十次，调用十次test，输出十次2
+//a的值为：2
+//test函数被调用的第：1次
+//a的值为：2
+//... ...
+//test函数被调用的第：9次
+//a的值为：2
+//test函数被调用的第：10次
+
+// 使用static修饰后：
+/*a的值为：2
+test函数被调用的第：1次
+a的值为：3
+test函数被调用的第：2次
+a的值为：4
+... ...
+a的值为：11
+test函数被调用的第：10次*/
+
+// 使用关键字void创建无返回值的函数：
+//void test(){
+//    printf("no return\n");
+//}
+
+// static关键字修饰全局变量：”全局变量的作用域被限制在定义它们的文件中“
+// ”全局变量被static修饰后无法被其它文件引用“
+// 使用extern声明（引入）工程内的其它变量：
+//extern int g_val;
+//
+//int main(){
+//
+//    printf("%d\n",g_val);
+////    printf("%d\n",g_val_2); // 报错：变量未定义
+//
+//    return 0;
+//}
+//// 2023
+
+// static修饰函数：(函数也具有外部链接属性)
+
+//int Add(int x, int y)  // 定义求和函数，把求和函数放到add.c中引用过来
+//{
+//    return x + y;
+//}
+
+//extern int Add(int x, int y); // 引用Add（参数也要写）
+//
+//int main()
+//{
+//    int a = 1, b = 2;
+//    int c = Add(a,b);
+//
+//    printf("%d\n", c);
+//
+//    return 0;
+//}
+
+// register寄存器关键字："建议把某变量放入寄存器中，这样取数据更快"
+//int main()
+//{
+//    register int num =3; // 建议把3放入寄存器中存储
+////    只是建议，放到哪里最终由编译器决定。
+//
+//    return 0;
+//}
