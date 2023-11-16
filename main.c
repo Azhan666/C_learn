@@ -744,177 +744,6 @@ ChatGPT
 //23
 //真垃圾，23岁了编程技术还这么菜！
 
-// 强制类型转换：
-//int main(){
-//
-//    int a = (int)3.14; // 将3.14强制转换为整型
-//    printf("%d",a);
-//
-//    return 0;
-//}
-//// 结果：
-//// 3
-
-// 赋值运算符和相等的区别：
-//int main(){
-//
-//    int a = 10;
-//    if (a = 3)
-//    {
-//        printf("这是赋值\n");
-//    }
-//    if (a == 3)
-//    {
-//        printf("这是相等\n");
-//    }
-//    return 0;
-//}
-
-// 逻辑与与逻辑或：&&:“并且”、||：“或者”
-
-//int main(){
-//
-//    int a = 0,b = 1; // 0为假，非0为真
-//    if(a && b)
-//    {
-//        printf("条件不成立，必须都为真！\n");
-//    }
-//    if(a || b)
-//    {
-//        printf("条件成立，有真就行！");
-//    }
-//
-//    return 0;
-//}
-////条件成立，有真就行！
-
-// 三目操作符：有三个操作数（类似于python中的三目运算符）
-
-//int main(){
-//
-//    int a = 10,b = 20;
-//    int r = a > b ? a : b; // 如果a大于b：是，则为a,否，则为b
-//
-//    printf("%d\n",r); // a>b为否，应该输出b
-//
-//    return 0;
-//}
-//// 结果符合预期：
-//// 20
-
-// 常见关键字：
-//auto: 自动创建变量、自动销毁变量,默认省略
-
-//int main(){
-//
-//    auto int a = 10,b = 20; // 自动创建变量ab(auto默认省略)
-//    return 0;
-//} // 销毁变量ab
-
-// break: 跳出循环，和py一样，常和for、while、do while搭配
-
-// case：和switch搭配，switch语句是一种常用的流程控制语句。
-// 它的作用是根据一个表达式的值，判断其是否等于一系列常量值中的任意一个，
-// 并执行相应的代码块，需要注意的是，在每个case关键字的语句序列中必须包含break语句。
-// break语句用于跳出switch语句，使程序执行流程跳转到switch语句后面的下一条语句。
-// 如果不加break语句，程序将继续执行下一个case语句，直到遇到break语句
-// 或switch语句结束为止。
-// 参考链接：https://baijiahao.baidu.com/s?id=1760498396078786457&wfr=spider&for=pc
-
-//当你学习C语言的switch语句时，你实际上是在学习一种用于多分支条件控制的结构。
-//switch语句允许你基于一个表达式的值来选择执行不同的代码块。
-//以下是switch语句的基本结构：
-//switch (expression) {
-//    case constant1:
-//        // 代码块1
-//        break;
-//    case constant2:
-//        // 代码块2
-//        break;
-//       // 更多的case语句
-//    default:
-//    // 如果expression的值不匹配任何一个case时执行的代码
-//}
-
-//这里是一些关于switch语句的重要点：
-//表达式（expression）：
-// switch语句中的表达式是一个整数表达式（可以是变量或常量）。
-// switch将会比较这个表达式的值与case语句中的常量值。
-//case语句：
-// 每个case标签后面跟着一个常量值。如果表达式的值等于某个case的常量值，程序将会执行对应的代码块。
-//
-//break语句：
-// 在每个case的代码块末尾都有一个break语句，它用于终止switch语句。
-// 如果忘记写break，程序将会继续执行下一个case中的代码，
-// 直到遇到break或switch语句结束。
-//
-//default语句： default标签是可选的，用于处理switch表达式的值与
-// 任何case都不匹配的情况。它类似于else语句中的内容。
-//
-//下面是一个简单的例子，演示了switch语句的基本用法：
-//#include <stdio.h>
-
-//int main() {
-//    int choice; // 创建一个接收用户输入的变量choice（选则）
-//
-//    printf("Enter a number (1-3): ");
-//    scanf("%d", &choice);
-//
-//    switch (choice) { // 跟据输入使用switch case语句执行不同的代码块
-//        case 1:
-//            printf("You chose One.\n");
-//            break;
-//        case 2:
-//            printf("You chose Two.\n");
-//            break;
-//        case 3:
-//            printf("You chose Three.\n");
-//            break;
-//        default:
-//            printf("Invalid choice.\n"); // 输入的内容非1-3
-//    }
-//
-//    return 0;
-//}
-// 这个例子中，用户输入一个数字，程序根据输入的数字输出相应的信息。
-// 如果输入的数字不是1、2或3，则输出"无效的选则"。
-
-// 下面自己尝试：
-
-//int main(){
-//
-//    int choice; // 创建一个变量接受用户输入，申请内存存放输入
-//
-//    // 使用printf提示用户进行输入
-//    printf("请输入你的年龄：(1-100)");
-//
-//    // 使用scanf()扫描，告知内存地址
-//    scanf("%d",&choice);
-//
-//    // 使用switch case表达式输出不同信息
-//    switch (choice) { // choice接收输入，表达式就是choice
-//        case 1: // 输入的内容就是case的表达式
-//            printf("太棒啦，1岁就会玩电脑啦！");
-//            break; // 使用break关键字退出代码块
-//
-//        case 100:
-//            printf("太棒啦，100岁了还能玩电脑！");
-//            break;
-//
-//        case 23:
-//            printf("真垃圾，23岁了编程技术还这么菜！");
-//            break;
-//
-//        default: // 使用default输出默认信息
-//            printf("不行啊，多大了还不会编程！");
-//    }
-//
-//    return 0;
-//}
-// 测试用例：结果符合预期
-//23
-//真垃圾，23岁了编程技术还这么菜！
-
 // 关键字：typedef:类型定义:声明一个别名的类型：“给太长的类型名取别名，
 // 类似于py的as”
 
@@ -1044,3 +873,176 @@ test函数被调用的第：10次*/
 //
 //    return 0;
 //}
+
+// 文章4
+
+//#define 定义标识符常量·：
+////#define NUM 100 // 符号常量NUM代表100，在编译阶段NUM会被替换为100
+//
+////#define 定义宏：（宏是有参数的）：
+////在C语言中，`#define`是用来定义宏的预处理指令。宏是一种代码替换的技术，
+//// 通过定义宏，你可以在程序中使用简单的标识符来表示一组代码，这组代码会在
+//// 预处理阶段被替换成相应的内容。`#define`的基本语法如下：
+//
+////#define 标识符 替换文本
+//
+////例如，下面是一个简单的宏定义示例：
+////#define PI 3.14159
+////在这个例子中，`PI`是一个标识符，它被定义为`3.14159`。
+//// 在程序中，每次出现`PI`时，都会被替换为`3.14159`。
+//
+////宏的作用有以下几个方面：
+//1. **符号常量定义：** 通过宏定义可以创建符号常量，这样可以在程序中使用
+// 有意义的标识符来代替一些常量值，使代码更易读，也更容易维护。
+
+//#define MAX_SIZE 100
+//这里，`MAX_SIZE`就代表了一个常量值100，方便在程序中使用。
+
+//2. **代码替换：** 宏定义还可以用于替换一段代码。例如，你可以定义
+// 一个简单的宏来交换两个变量的值：
+
+//#define SWAP(x, y) { int temp = x; x = y; y = temp; }
+//在程序中使用这个宏可以实现变量交换的功能。
+//int a = 5, b = 10;
+//SWAP(a, b);
+//上述代码在预处理阶段会被替换为：
+//{ int temp = a; a = b; b = temp; }
+
+//3. **条件编译：** 宏定义也经常用于条件编译，通过在编译时根据条件
+// 选择性地包含或排除某些代码块，可以实现不同平台或配置下的代码控制。
+
+//#define DEBUG
+//在调试阶段使用上述宏定义，然后可以通过条件编译选择是否包含调试代码。
+//这只是宏的一些基础用法，宏在C语言中有更广泛的应用，但也需要注意一些潜
+// 在的问题，比如宏的副作用和作用域等。
+
+// 自己尝试使用宏定义：
+//#define ADD(x,y) ((x)+(y)) // 宏定义ADD(x,y),宏体为(x)+(y)
+//
+//int main()
+//{
+//    int x = 0, y = 0;
+//    printf("请输入要求和的数：\n");
+//    scanf("%d %d",&x,&y);
+//    int z = ADD(x,y); // 定义变量z来接收结果，使用宏定义替换(x)+(y)
+//    printf("求和结果为:%d",z);
+//
+//    return 0;
+//}
+// 结果符合预期：
+//请输入要求和的数：
+//1 2
+//求和结果为:3
+
+// 指针：“内存单元中内存的编号，即地址，存放指针（地址）的变量：指针变量”
+//int main()
+//{
+//    int a = 10; // 向内存申请4个字节，存储10
+//    printf("这是变量a:%d",a);
+//    scanf("%d",&a); // &a:取地址，按照地址在内存中找到a
+//    int* p = &a; // 将a的地址指向指针变量p，p就是指针变量
+//    // * 表示p是指针变量，int 说明指针p指向的对象是整型
+//   //    “指针变量就是用来存放地址的”
+//   // *：“解引用操作符，*p就是通过p中存放的地址找到所指向的对象，因此，
+//   // *p就是p指向的对象。”
+//  // 指针变量的大小取决于地址的大小
+//
+//    return 0;
+//}
+
+// 结构体：
+//结构体是一种用户自定义的数据类型，用于“将不同类型的数据组合在一起，
+//形成一个新的数据类型”。以下是关于C语言结构体的一些基本概念和用法：
+
+// 定义结构体
+//struct Student { // 结构体：学生
+//    // 结构体成员：
+//    int id;     // 学号
+//    char name[50];
+//    char sex[10]; // 性别
+//    char tel[12]; // 电话
+//};
+//
+//int main(){
+//
+//    // 使用结构体类型创建结构体变量s:（结构体类型不占空间，创建的变量才申请空间）
+//   //    struct Student s
+//  // 给创建的结构体变量赋值（初始化）：
+//    struct Student s = {2023001,"张三","男","10086"};
+//    // 通过“结构体对象.成员名”访问结构体成员：
+//    printf("%d %s %s %s\n",s.id,s.name,s.sex,s.tel);
+//
+//    return 0;
+//}
+////2023001 张三 男 10086
+//
+//// 使用结构体指针访问结构体成员：
+//void print(struct Student* ps){ // 定义结构体类型指针ps
+//
+//    // 使用“(*指针名).成员名访问结构体成员：
+//    printf("%d %s %s %s\n",(*ps).id,(*ps).name,(*ps).sex,(*ps).tel);
+//    // 使用“->”表示ps指向的对象（Student）的成员：
+//    printf("%d %s %s %s\n",ps->id,ps->name,ps->sex,ps->tel);
+//}
+
+
+// GPT:
+//// 使用上面定义好的的结构体“类型”创建结构体变量
+//struct Student student1;
+//
+//// 初始化结构体变量
+//student1.id = 1;
+//strcpy(student1.name, "John Doe");
+//student1.gpa = 3.8;
+//
+//// 结构体作为函数参数
+//void printStudent(struct Student s) {
+//    printf("ID: %d\n", s.id);
+//    printf("Name: %s\n", s.name);
+//    printf("GPA: %.2f\n", s.gpa);
+//}
+//
+//// 调用函数
+//printStudent(student1);
+//
+//// 结构体指针
+//struct Student *ptrStudent = &student1;
+//
+//// 通过指针访问结构体成员
+//printf("ID: %d\n", ptrStudent->id);
+//printf("Name: %s\n", ptrStudent->name);
+//printf("GPA: %.2f\n", ptrStudent->gpa);
+//
+//// 嵌套结构体
+//struct Address {
+//    char street[50];
+//    char city[50];
+//    int zipCode;
+//};
+//
+//struct Person {
+//    char name[50];
+//    int age;
+//    struct Address address;
+//};
+//
+//// 结构体数组
+//struct Student class[5];
+//
+//// 初始化结构体数组
+//class[0].id = 1;
+//strcpy(class[0].name, "Alice");
+//class[0].gpa = 3.5;
+//// 同样的方式初始化其他数组元素
+//
+//// 使用 typedef 简化结构体声明（结构体关键字）
+//typedef struct {
+//    int hours;
+//    int minutes;
+//    int seconds;
+//} Time;
+
+
+
+
+
