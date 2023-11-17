@@ -1042,7 +1042,124 @@ test函数被调用的第：10次*/
 //    int seconds;
 //} Time;
 
+// 分支语句（选择结构）：
+//int main(){
+//
+//    int grade = 0; // 初始化初试成绩
+//    int grade_t = 0; // 初始化复试成绩
+//    int Grade_threshold = 388; //  初始化分数线
+//    int Line_for_re_examinatio = 399; // 初始化复试线
+//
+//    printf("考生您好，欢迎来到长安大学研究生录取系统！\n请按照提示输入您的成绩！");
+//    printf("请输入您的初试成绩：");
+//    scanf("%d",&grade);
+//
+//    if (grade >= Grade_threshold)
+//    {
+//        printf("恭喜你成功进入复试！");
+//    }
+//    else
+//    {
+//        printf("很遗憾，您未进入复试。");
+//    }
+//
+//    printf("请输入您的总成绩：\n");
+//    scanf("%d",&grade_t);
+//
+//    if (grade_t >= Line_for_re_examinatio)
+//    {
+//        printf("恭喜你已被长安大学录取！");
+//    }
+//    else
+//    {
+//        printf("很遗憾，您未被录取。");
+//    }
+//
+//    return 0;
+//}
+// 结果符合预期：
+//考生您好，欢迎来到长安大学研究生录取系统！
+//请按照提示输入您的成绩！请输入您的初试成绩：401
+//恭喜你成功进入复试！请输入您的总成绩：
+//421
+//恭喜你已被长安大学录取！
 
+// 选择结构2：else if:多分支：“可以实现多条件判断”
 
+//int main()
+//{
+//    int grade = 0;
+//    printf("请输入您的成绩：");
+//    scanf("%d",&grade);
+//
+//    if (grade > 380)
+//        printf("苍天不负有心人，恭喜你上岸啦！");
+//    else if (grade < 380 && grade > 370)
+//        printf("加油，还有机会！");
+//    else if (grade < 370 && grade > 360)
+//        printf("希望还是有的。");
+//    else if (grade < 360)
+//        printf("莫等闲，白了少年头，空悲切！");
+//    else
+//        printf("请反省自己，是不是努力了！");
+//
+//    return 0;
+//}
+
+// else 只跟最近的if匹配成对，不是按照缩进匹配：
+
+//int main()
+//{
+//    int a = 0, b = 1;
+//    if (a == 1) // 条件不满足，下面的代码块不执行，直接结束
+//    {     if (b == 2)
+//            printf("hell0\n");
+//          else // 这个else是跟 if (a == 1)匹配的
+//            printf("hi\n");
+//    }
+//    return 0;
+//}
+
+// 奇数判断：
+//int main()
+//{
+//    int num = 0;
+//    printf("请输入您要判断的整数：");
+//    scanf("%d",&num);
+//    if (num % 2 == 1) // num对2取模，商x余y，若余1，则模为1，则为奇数
+//    // 易错：(num % 2 = 1)：把等与写成赋值
+//        printf("这是个奇数");
+//    else
+//        printf("这是个偶数");
+//
+//    return 0;
+//}
+
+// 输出1-100之间的奇数：
+//int main()
+//{
+//    int num = 0; // 初始化num
+//    for (num = 0; num <= 100; num++) // 生成1-100之间的数
+//    {
+//        if (num % 2 == 1)
+//            printf("%d\n",num);
+//    }
+//    return 0;
+//}
+
+// while循环版本：
+int main()
+{
+    int i = 1; // 初始化变量i
+    while (i <= 100) // 循环条件
+    {
+        if (i % 2 == 1) // 判断奇数
+            printf("%d",i); // 输出奇数
+        i++; // 一轮判断结束，继续判断下一个数，若不自增，i不会>100，循环无法结束
+             // 将会一直打印1
+    }
+
+    return 0;
+}
 
 
