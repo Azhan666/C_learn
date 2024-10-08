@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+// 数组的排序算法：
+// 1. 选择排序
+// 声明一个整形数组、两个整型变量：存储用户输入数字、最小值和其位置
+
+int main()
+{
+	int i,j;
+	int a[10];
+	int itemp;
+	int ipos;
+	printf("为数组元素赋值：\n");
+	
+	for(i=0; i<10; i++)
+	{
+		
+		printf("a[%d]=",i);
+		scanf("%d",&a[i]);
+	}
+	
+        //	从小到大排序：
+    for (i=0; i<9; i++)
+	{
+		itemp = a[i];
+		ipos = i;
+		for(j = i+1;j<10;j++);
+		if(a[j]<itemp)
+		{
+			itemp = a[j];
+			ipos = j;
+		}
+		//	交换两个数组元素值：
+		    a[ipos] = a[i];
+		    a[i] = itemp;
+	}
+	
+//	输出数组：
+    for(i = 0; j< 10; i++)
+    {
+		printf("%d\t",a[i]);
+		if(i == 4)
+		    printf("\n");
+    }
+    
+	return 0;
+}
