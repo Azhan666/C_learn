@@ -1,0 +1,97 @@
+1. 请编写程序在屏幕上显示你的名字、爱好以及你想对老师说的话。同时将你的班级以注释的方式显示出来。请注意编程规范。
+
+```c
+#include <stdio.h>
+
+/* 文件名: display_info.c
+   作者: 何展
+   日期: 2024-10-08
+   功能: 显示学生的名字、爱好以及想对老师说的话
+   班级: 2024级物联网工程专升本一班
+*/
+
+int main(void) {
+    printf("我的名字是：你的名字\n");
+    printf("我的爱好是：你的爱好\n");
+    printf("我想对老师说：你想对老师说的话\n");
+    return 0;
+}
+```
+
+2. 请编写一个程序，输出下列图形。请注意编程规范。
+
+```c
+#include <stdio.h>
+
+/* 文件名: print_stars.c
+   作者: 你的名字
+   日期: 2024-10-08
+   功能: 输出一个指定的图形
+   班级: 你的班级
+*/
+
+int main(void) {
+    printf("*****************\n");
+    printf("*      Hello World!     *\n");
+    printf("*****************\n");
+    return 0;
+}
+```
+
+3. 改正下列程序中的错误，在屏幕上显示“There are 52 weeks in a year!”。如果程序不规范，请按照编程规范进行修改。
+
+```c
+#include <stdio.h>
+
+/* 文件名: weeks_in_year.c
+   作者: 你的名字
+   日期: 2024-10-08
+   功能: 显示一年有多少周
+   班级: 你的班级
+*/
+
+int main() {
+    printf("There are 52 weeks in a year!\n");
+    return 0;
+}
+```
+
+4. 编写程序说明将一只大象放入冰箱中的步骤。每个步骤一行。请注意编程规范。
+
+```c
+#include <stdio.h>
+
+/* 文件名: elephant_in_fridge.c
+   作者: 你的名字
+   日期: 2024-10-08
+   功能: 描述将一只大象放入冰箱的步骤
+   班级: 你的班级
+*/
+
+int main(void) {
+    printf("1. 打开冰箱门\n");
+    printf("2. 把大象放入冰箱\n");
+    printf("3. 关上冰箱门\n");
+    return 0;
+}
+```
+
+5. 编写程序，在屏幕上输出下列图形。请注意编程规范。
+
+```c
+#include <stdio.h>
+
+/* 文件名: print_A.c
+   作者: 你的名字
+   日期: 2024-10-08
+   功能: 输出一个指定的图形
+   班级: 你的班级
+*/
+
+int main(void) {
+    printf("    A\n");
+    printf("A  A\n");
+    printf("A    \n");
+    return 0;
+}
+```
