@@ -1,0 +1,130 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// 使用线性表实现一元多项式的合并
+// 定义多项式的项结构体
+typedef struct Term {
+    int coef;  // 系数
+    int exp;   // 指数
+} Term;
+
+// 定义多项式结构体
+typedef struct Polynomial {
+    Term *terms;  // 指向项数组的指针
+    int size;     // 多项式中项的数量
+    int capacity; // 多项式的最大容量
+} Polynomial;
+
+// 初始化多项式
+void initPolynomial(Polynomial *p, int capacity) {
+    p->terms = (Term *)malloc(sizeof(Term) * capacity);
+    p->size = 0;
+    p->capacity = capacity;
+}
+
+// 清理多项式
+void freePolynomial(Polynomial *p) {
+    free(p->terms);
+    p->terms = NULL;
+    p->size = 0;
+    p->capacity = 0;
+}
+
+// 添加项到多项式
+void addTerm(Polynomial *p, int coef, int exp) {
+    if (p->size >= p->capacity) {
+        // 需要扩容
+        p->capacity *= 2;
+        p->terms = (Term *)realloc(p->terms, sizeof(Term) * p->capacity);
+    }
+    p->terms[p->size].coef = coef;
+    p->terms[p->size].exp = exp;
+    p->size++;
+}
+
+// 合并两个多项式
+void mergePolynomials(Polynomial *p1, Polynomial *p2, Polynomial *result) {
+    initPolynomial(result, p1->size + p2->size);
+
+    int i = 0, j = 0, k = 0;
+    while (i < p1->size && j < p2->size) {
+        if (p1->terms[i].exp > p2->terms[j].exp) {
+            addTerm(result, p1->terms[i].coef, p1->terms[i].exp);
+            i++;
+        } else if (p1->terms[i].exp < p2->terms[j].exp) {
+            addTerm(result, p2->terms[j].coef, p2->terms[j].exp);
+            j++;
+        } else {
+            // 指数相同，合并系数
+            int sum = p1->terms[i].coef + p2->terms[j].coef;
+            if (sum != 0) {
+                addTerm(result, sum, p1->terms[i].exp);
+            }
+            i++;
+            j++;
+        }
+        k++;
+    }
+
+    // 添加剩余的项
+    while (i < p1->size) {
+        addTerm(result, p1->terms[i].coef, p1->terms[i].exp);
+        i++;
+    }
+    while (j < p2->size) {
+        addTerm(result, p2->terms[j].coef, p2->terms[j].exp);
+        j++;
+    }
+}
+
+// 打印多项式
+void printPolynomial(Polynomial *p) {
+    for (int i = 0; i < p->size; i++) {
+        if (i > 0) {
+            printf(" + ");
+        }
+        if (p->terms[i].exp == 0) {
+            printf("%d", p->terms[i].coef);
+        } else if (p->terms[i].exp == 1) {
+            printf("%d*x", p->terms[i].coef);
+        } else {
+            printf("%d*x^%d", p->terms[i].coef, p->terms[i].exp);
+        }
+    }
+}
+
+int main() {
+    Polynomial p1, p2, result;
+    initPolynomial(&p1, 10);
+    initPolynomial(&p2, 10);
+    initPolynomial(&result, 20);
+
+    // 添加项到p1
+    addTerm(&p1, 3, 2);
+    addTerm(&p1, 2, 1);
+    addTerm(&p1, 1, 0);
+
+    // 添加项到p2
+    addTerm(&p2, 2, 2);
+    addTerm(&p2, 3, 1);
+    addTerm(&p2, 4, 0);
+
+    printf("Polynomial p1: ");
+    printPolynomial(&p1);
+    printf("\n");
+
+    printf("Polynomial p2: ");
+    printPolynomial(&p2);
+    printf("\n");
+
+    mergePolynomials(&p1, &p2, &result);
+    printf("Merged Polynomial: ");
+    printPolynomial(&result);
+    printf("\n");
+
+    freePolynomial(&p1);
+    freePolynomial(&p2);
+    freePolynomial(&result);
+
+    return 0;
+}
