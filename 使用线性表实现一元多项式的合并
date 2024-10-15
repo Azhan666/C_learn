@@ -1,28 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// 使用线性表实现一元多项式的合并
-// 定义多项式的项结构体
+// 使用线性表实现一元多项式的合并:系数和指数
+// 一、定义多项式的【项】结构体:成员变量由 int型 coef、exp构成，申请__ 的连续存储的空间
 typedef struct Term {
     int coef;  // 系数
     int exp;   // 指数
-} Term;
+} Term; // 使用term即可
 
-// 定义多项式结构体
+// 定义【多项式】结构体
 typedef struct Polynomial {
-    Term *terms;  // 指向项数组的指针
+    Term *terms;  // 使用term:指向项数组的指针
     int size;     // 多项式中项的数量
     int capacity; // 多项式的最大容量
 } Polynomial;
 
 // 初始化多项式
 void initPolynomial(Polynomial *p, int capacity) {
+	// 使用指针访问成员：malloc()分配最大空间
     p->terms = (Term *)malloc(sizeof(Term) * capacity);
+    // 初始化置零
     p->size = 0;
+    // 使用指针指向成员首地址
     p->capacity = capacity;
 }
 
-// 清理多项式
+// 清理多项式（同初始化：对整个多项式初始化：空表）
 void freePolynomial(Polynomial *p) {
     free(p->terms);
     p->terms = NULL;
@@ -30,23 +33,25 @@ void freePolynomial(Polynomial *p) {
     p->capacity = 0;
 }
 
-// 添加项到多项式
+// 添加项到多项式：使用定义的结构体：访问成员变量：系数和指数
 void addTerm(Polynomial *p, int coef, int exp) {
     if (p->size >= p->capacity) {
-        // 需要扩容
+        // 需要扩容：首先默认扩大2倍（最优空间原则）
         p->capacity *= 2;
         p->terms = (Term *)realloc(p->terms, sizeof(Term) * p->capacity);
     }
     p->terms[p->size].coef = coef;
     p->terms[p->size].exp = exp;
     p->size++;
+    // 完成扩容（添加项）
 }
 
-// 合并两个多项式
+// 合并两个多项式：按同阶项:exp 合并
 void mergePolynomials(Polynomial *p1, Polynomial *p2, Polynomial *result) {
     initPolynomial(result, p1->size + p2->size);
 
     int i = 0, j = 0, k = 0;
+    // 判断系数是否相同
     while (i < p1->size && j < p2->size) {
         if (p1->terms[i].exp > p2->terms[j].exp) {
             addTerm(result, p1->terms[i].coef, p1->terms[i].exp);
