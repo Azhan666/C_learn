@@ -1,0 +1,109 @@
+根据实验要求，我们需要修改和补充几个不同的程序。我将逐一为你提供修改后的代码。
+
+### 1. 任意输入两个整数，输出其中较大的一个。
+
+```c
+#include <stdio.h>
+
+void main() {
+    int j, k, m;
+    printf("Enter j and k: ");
+    scanf("%d,%d", &j, &k); // [1] 地址运算符 &
+    if (j > k) {
+        m = j;
+    } else {
+        m = k;
+    }
+    printf("m=%d\n", m);
+}
+```
+
+### 2. 编写程序输入三个浮点型数据，求它们的平均值并输出。
+
+```c
+#include <stdio.h>
+
+void main() {
+    double a, b, c, sum, average;
+    printf("Enter three double nums:\n");
+    scanf("%lf %lf %lf", &a, &b, &c); // [1] %lf用于读取double类型
+    sum = a + b + c; // [2] 计算总和
+    average = sum / 3; // [3] 计算平均值
+    printf("average =%lf\n", average);
+}
+```
+
+### 3. 修改例2-1的程序，使其能够输出指定格式的结果。
+
+```c
+#include <stdio.h>
+
+int main() {
+    int lOperator, rOperator;
+    int nResult1, nResult2, nResult3, nResult4, nResult5;
+    printf("请输入两个整数,并计算它们的差：");
+    scanf("%d,%d", &lOperator, &rOperator);
+    nResult1 = lOperator - rOperator;
+    printf("%d-%d=%d\n", lOperator, rOperator, nResult1);
+    return 0;
+}
+```
+
+### 4. 如果要参加运算的两个数是浮点数，应如何修改程序。
+
+```c
+#include <stdio.h>
+
+int main() {
+    double lOperator, rOperator;
+    double sum, difference;
+    printf("请输入两个浮点数：");
+    scanf("%lf %lf", &lOperator, &rOperator);
+    sum = lOperator + rOperator;
+    difference = lOperator - rOperator;
+    printf("%.3lf+%.3lf=%.2lf\n", lOperator, rOperator, sum);
+    printf("%.3lf-%.3lf=%.2lf\n", lOperator, rOperator, difference);
+    return 0;
+}
+```
+
+### 5. 修改例2-1的程序，使其输出格式为：4+5=9，4-5=-1，等等。
+
+```c
+#include <stdio.h>
+
+int main() {
+    int lOperator, rOperator;
+    int nResult1, nResult2, nResult3, nResult4, nResult5;
+    printf("请输入两个整数：");
+    scanf("%d %d", &lOperator, &rOperator);
+    nResult1 = lOperator + rOperator;
+    nResult2 = lOperator - rOperator;
+    nResult3 = lOperator * rOperator;
+    nResult4 = lOperator / rOperator;
+    nResult5 = lOperator % rOperator;
+    printf("%d+%d=%d\n", lOperator, rOperator, nResult1);
+    printf("%d-%d=%d\n", lOperator, rOperator, nResult2);
+    printf("%d*%d=%d\n", lOperator, rOperator, nResult3);
+    printf("%d/%d=%d\n", lOperator, rOperator, nResult4);
+    printf("%d%%%d=%d\n", lOperator, rOperator, nResult5);
+    return 0;
+}
+```
+
+### 6. 输入一个整数和一个浮点数，求出它们的倒数，并显示在屏幕上。
+
+```c
+#include <stdio.h>
+
+int main() {
+    int integer;
+    double floatNumber, inverseInt, inverseFloat;
+    printf("请输入一个整数和一个浮点数，并求出二者的倒数：");
+    scanf("%d %lf", &integer, &floatNumber);
+    inverseInt = 1.0 / integer;
+    inverseFloat = 1.0 / floatNumber;
+    printf("1/%d=%.2lf; 1/%.1lf=%.2lf\n", integer, inverseInt, floatNumber, inverseFloat);
+    return 0;
+}
+```
