@@ -1,0 +1,2961 @@
+//
+// Created by 阿展要提高 on 2024/12/12.
+//
+
+//【1】有5个人坐在一起，问第5个人多少岁，他说比第4个人大两岁。问第4个人岁数，他说比第3个人大两岁。
+//问第3个人，又说比第2个人大两岁。问第2个人，说比第1个人大两岁。最后问第1个人，他说是10岁。请问第５个人多大？
+// 递归至5：age += 2，调用自身：age1 = 10；
+
+// age:10、12、14、16、18
+//#include "stdio.h"
+//
+//int main()
+//{
+//    int age = 10,i = 0;
+//
+//    if(i<=5)
+//    {
+//        age += 2;
+//    }
+//    printf("第五个人的年龄是：%d",age);
+//
+//    return 0;
+//}
+//
+// 使用递归实现：
+//#include "stdio.h"
+//
+//// 主调函数：people 输出结果
+//int age(int people);
+//int main(){
+////    将age(5)age((people - 1)) +2第五个人的年龄赋给people5
+//    int people5 = age(5);
+//    printf("第五个人的年龄是：%d",people5);
+//    return 0;
+//}
+//// 被调函数：求出每个人的年龄
+//int age(int people){
+//
+////    返回第一个人的年龄
+//    if(people == 1){
+//        return 10;
+//    } else
+////    返回第2~5个人的年龄
+//        return age((people - 1)) +2;
+//}
+
+//函数fun的功能是：对a数组中n种商品价格进行分段统计，商品各段价格的数目存到b数组中；
+// 其中：价格为100元以下的个数存到b[0]中，价格为100元到199元的个数存到b[1]，
+// 价格为200元到299元的个数存到b[2]，价格为300元到399元的个数存到b[3]，价格为400元到499元的个数存到b[4]，
+// 价格为500元以上的个数存到b[5]中。
+//例如，当a数组中的数据为： 90、180、270、380、590、530、140、750、380时；
+//调用该函数后，b中存放的数据应是：1、2、1、2、0、3。
+
+//#include <stdio.h>
+//
+//// 被调函数fun()：实现根据价格分类：if-else if嵌套
+//// 实现不同价格存放到不同的数组区域
+//// n用于存放元素个数，后续在主调函数中介绍
+//// i结合for循环用于遍历所有元素
+//void fun(int a[], int b[], int n) {
+//    int i;
+//    for (i = 0; i < n; i++) {
+//        if (a[i] < 100) {
+//            b[0]++;
+//        } else if (a[i] < 200) {
+//            b[1]++;
+//        } else if (a[i] < 300) {
+//            b[2]++;
+//        } else if (a[i] < 400) {
+//            b[3]++;
+//        } else if (a[i] < 500) {
+//            b[4]++;
+//        } else {
+//            b[5]++;
+//        }
+//    }
+//}
+//
+//// 主调函数：使用数组a接收商品价格
+//int main() {
+//    int a[] = {90, 180, 270, 380, 590, 530, 140, 750, 380};
+////    数组b[]初始化
+//    int b[6] = {0};
+////    使用sizeof()实现：算出数组元素个数：数组占用的总空间除以单个元素大小即得元素个数
+////    sizeof(a)：数组a的大小，sizeof(a[0])：单个元素的大小，赋给n
+//    int n = sizeof(a) / sizeof(a[0]);
+//    // 使用函数fun()
+//    fun(a, b, n);
+//
+//    for (int i = 0; i < 6; i++) {
+//        printf("%d ", b[i]);
+//    }
+//
+//    return 0;
+//}
+
+//程序定义了3×3的二维数组，并在主函数中自动赋值（值为行下标和列下标之和）。
+//请编写函数fun( int a[][3])，函数的功能是：使数组左下三角元素中的值全部置成0 。
+// 例如：a 数组中的值为
+//| 0 1 2 |                               | 0  1  2 |
+//a = | 1 2 3 | 则返回主程序后a数组中的值应为 | 0  0  3 |
+//| 2 3 4 |                               | 0  0  0 |
+
+//#include <stdio.h>
+//
+//// 函数定义，传入二维数组a[3][3]
+//void fun(int a[3][3]);
+//
+//// 主调函数定义
+//int main() {
+//    int a[3][3] = {{0, 1, 2}, {1, 2, 3}, {2, 3, 4}};
+//
+//    // 使用函数
+//    fun(a);
+//
+//    // 使用for循环实现输出二维数组：行列对角线下标相同
+//    for (int i = 0; i < 3; i++) {
+//        for (int j = 0; j < 3; j++) {
+//            printf("%d ", a[i][j]);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+////
+//// 被调函数定义
+//void fun(int a[3][3]) {
+//    // 遍历数组，将左下三角元素置为0
+//    for (int i = 0; i < 3; i++) {
+////        控制对角线上的元素：使行列相等：j=i
+//        for (int j = i; j < 3; j++) {
+////            i、j交换位置实现左下角元素置零
+//            a[j][i] = 0;
+////            实现右上角角元素置零
+////            a[i][j] = 0;
+//        }
+//    }
+//}
+
+//给定程序中函数 fun 的功能是：求k!（k<13），所求阶乘的值作为函数值返回。
+// 请改正程序中的错误，使它能得出正确的结果。
+
+//将if (k=0)改为if (k==0)，因为=是赋值运算符，而==才是比较运算符。
+//在else if后面添加了k > 0的条件，以确保递归调用时k是递减的。
+//添加了return 0，以处理k为负数的情况，因为阶乘只对非负整数定义。
+
+//#include <stdio.h>
+//
+//// 函数声明
+//long fun(int k);
+//
+//int main() {
+//    int k;
+//    printf("Input k: ");
+//    scanf("%d", &k);
+//    printf("%d!=%ld\n", k, fun(k));
+//    return 0;
+//}
+//
+//// 函数定义
+//long fun(int k) {
+//    if (k == 0) {
+//        return 1L;
+//    } else if (k > 0) {
+//        return k * fun(k - 1);
+//    }
+//    return 0; // 添加了返回0，处理k为负数的情况
+//}
+
+//#include "stdio.h"
+//
+//int main() {
+//
+//    int i, a[], b[], *p, *q;
+//    p = a;
+//    q = b;
+//
+//    printf("");
+//
+//    for (int i = 0; i < 10; i++) {
+//        *(q+9-i) = *(p+i);
+//    }
+//
+//    return 0;
+//}
+
+//指向指针的指针：
+
+//int main(){
+////    指针变量的嵌套
+////    int **p; == "int *(*p);"
+//    int i;
+//    char **p; // 指针p指向的是指针
+//    char *num[]={"one,two,three,four"};
+//
+//
+//
+//
+//
+//    return 0;
+
+//}
+
+//#include "stdio.h"
+//
+//void swap(int *a,int *b){
+//
+//    int tmp;
+//    tmp = *a;
+//    *a = *b;
+//    *b = tmp;
+//
+//}
+//int main(){
+//
+//    int x,y;
+//    int *p_x,*p_y;
+//    printf("Please Input num:\n");
+//
+//    scanf("%d",&x);
+//    scanf("%d",&y);
+//
+//    p_x = &x;
+//    p_y = &y;
+//
+//    swap(p_x,p_y);
+//    printf("x = %d\n",x);
+//    printf("y = %d\n",y);
+//
+//    return 0;
+//}
+
+#include "stdio.h"
+
+//int main(){
+
+
+//    printf ("%d, %c", 'b', 'b'+1 );
+//    int i, a;
+//    i=(a=2*3,a*5),a+6;
+//
+//    printf("%d\n",i);
+
+//    int i = 32777;
+//    short si = i;
+//    int j = si;
+//    printf("%d\n",j);
+
+//    int n; float f=13.8;
+//    n=(int)f%3;
+//    printf("%d\n",n);
+
+//    int a = 10, b = 20, c;
+//
+//    c = (a % 2 == 0) ? a : b;
+//    printf("%d\n",c);
+
+//    int x=1, y=012;
+//    printf("%d",y*x++);
+
+//    {    int a, b;
+//        for(a=1, b=1; a<=100; a++)
+//        {   if(b>=10) break;
+//            if(b%3==1)
+//            {  b+=3;
+//                continue;
+//            }
+//        }
+//        printf("%d",a);
+//        return 0;
+//    }
+
+
+//    int k=0;
+//
+//    while(k=1) k++;
+//    printf("%d",k);
+
+//    int x=23;
+//    do{
+//        printf("%d",x--);
+//    } while(!x);
+//
+//    return 0;
+
+//#include <stdio.h>
+
+//
+//// 这是一个简单的函数，用于交换两个整数的值
+//    void swap(int a, int b) {
+//        int temp;
+//        temp = a; // 将第一个参数的值保存到临时变量
+//        a = b;    // 将第二个参数的值赋给第一个参数
+//        b = temp; // 将临时变量的值赋给第二个参数
+//    }
+//
+//    int main() {
+//        int x = 10;
+//        int y = 20;
+//
+//        printf("Before swap: x = %d, y = %d\n", x, y);
+//        swap(x, y); // 调用函数，传递x和y的值给形参a和b
+//        printf("After swap: x = %d, y = %d\n", x, y);
+//
+//        return 0;
+//}
+
+//#include "stdio.h"
+//int func(int i)
+//    {
+//        if (i > 1)
+//            return i * func(i - 1);
+//        else
+//            return 1;
+//
+//    }
+// int main(){
+//
+//     printf("%d", func(5));
+//     return 0;
+//}
+
+#include "stdio.h"
+
+//int main(){
+//
+////    int a = {0};
+////    int b = {{0},{1}};
+////
+////    printf("%d\n",a);
+////    printf("%d\n",b);
+////    int *p[3],a[3];
+////
+////        p[0] =  &a[0];
+////
+////    printf("%d\n",*p);
+//
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//
+//int main() {
+//    float b, h;
+//    float a; // 使用浮点数以确保面积计算的准确性
+//
+//    // 读取输入的底和高
+//    scanf("%f %f", &b,&h);
+//
+//    // 计算面积
+//    a = (float)b * h / 2;
+//
+//    // 输出面积
+//    printf("%.2f\n", a);
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//
+//int main() {
+//    float b, h;
+//    float a; // 使用浮点数以确保面积计算的准确性
+//
+//    // 读取输入的底和高
+////    scanf("%f %f",&b,&h);
+//    scanf("%f %f", &b, &h);
+//
+//    // 计算面积
+//    a=(float)b*h/2;
+//
+//    // 输出面积
+//    printf("%.2f",a);
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//int main() {
+//
+//    int i, j, tab[3][4];
+//    for (i = 0; i < 3; i++)
+//        for (j = 0; j < 4; j++)
+//            tab[i][j] = i * j;
+//
+//    return 0;
+//}
+
+#include <stdio.h>
+
+//int main() {
+////    int sum, n, i;  // 定义变量
+////    sum = 0;
+////    for (i = 1; i <= n; i++){
+////        sum = sum + i;
+////    }
+////    sum = 0;
+////    i = 1;
+////    while (i <= n){
+////        sum = sum + i;
+////        i++;
+////    }
+//
+//
+//
+//    return 0;
+//}
+
+#include <stdio.h>
+#include <math.h>
+//int main()
+//{
+//
+//    float a, b, c, s, area;
+//    printf("请输入三边长:\n");
+//    scanf("%f %f %f", &a, &b, &c);
+//    s= (a+b+c)/2;
+//    area= sqrt(s*(s-a)*(s-b)*(s-c));
+//
+//            ;
+//    printf("area=%f\n", area);
+//    return 0;
+//}
+
+#include <stdio.h>
+
+//int main()
+//{
+//    int n;
+//
+//    for(n = 7; n <= 77; n++)
+//    {
+//        if(n % 7 != 0)
+//            continue;
+//        printf("%d\n", n);
+//    }
+//
+//    return 0;
+//}
+
+#include<stdio.h>
+#include "string.h"
+//void main()
+//{
+//    void inverse(char cstr[]);
+//    char str[80];
+//    gets(str);
+//    inverse(str);
+//    puts(str);
+//}
+//void inverse(char cstr[])
+//{
+//    char ct;
+//    int i,j;
+//    for(i=0,j=strlen(cstr); i<j; i++,j--)
+//    {
+//        ct=cstr[i];
+//        cstr[i]=cstr[j-1];
+//        cstr[j-1]=ct;
+//    }
+//}
+
+
+//#include <stdio.h>
+
+//int main(void)
+//{
+//    int *ptr, arrA[5];
+//    //读入数组元素
+//    for ( ptr=arrA; ptr<arrA+5; ptr++)
+//    {
+//        scanf("%d",ptr);
+//    }
+//    //输出数组元素
+//
+//    for(ptr=arrA; ptr<arrA+5; ptr++)
+//    {
+//        printf("%d ",*ptr);
+//    }
+//    printf("\n");
+//
+//    return 0;
+//}
+
+//# include <stdio.h>
+//void swap ( int *pa, int *pb );
+//
+//int main( )
+//{
+//    int a, b;
+//
+//    scanf ( "%d%d", &a, &b);
+//    swap ( &a, &b );
+//    printf("%d %d\n", a, b);
+//}
+//
+//void swap ( int *pa, int *pb )
+//{
+//    int temp; /* 定义整型变量 temp */
+//    temp = *pa; /* 交换 *pa 和 *pb 的值 */
+//}
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//    int day, month, year;
+//
+//    scanf("%d", &year);
+//    for(month = 1; month <= 12; month++){
+//        switch (month){
+//            case 2:
+//                if((year % 4 == 0 && year % 100 != 0)||year % 400 == 0 ) {
+//                    day = 29;
+//                }else{
+//                    day = 28;
+//                }
+//                break;
+//                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+//                day = 31; break;
+//                case 4: case 6: case 9: case 11:
+//                day = 30; break;
+//        }
+//        printf("%d ", day) ;
+//    }
+//
+//    return 0;
+//}
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//    int a,b;
+//    scanf("%d%d",&a,&b);
+//    b = a + b;
+//    printf("%d",b);
+//    return 0;
+//}
+
+#include <stdio.h>
+
+//int main() {
+//    int i, j;
+//    // 外层循环控制行数
+//    for (i = 1; i <= 5; i++) {
+//        // 内层循环控制列数
+//        for (j = 1; j <10; j++) {
+//            // 填空：当 j 等于 5 时，跳过当前迭代
+//            if (j == 5) {
+//                continue;
+//            }
+//            printf("%d*%d=%2d ", i, j, i * j);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+//#include <stdio.h>
+//int main(void)
+//{int x;
+//
+//    scanf("%d",&x);
+//    if(x>=0)
+//        printf("%d\n",x);
+//    else
+//        printf("%d\n",-x);
+//    return 0;
+//}
+
+//#include <stdio.h>
+//int find_min(int *p,int n)
+//{
+//    int min,*q;
+//    min=*p;
+//    for(q=p; q<0; q++)
+//        if(*q<min) min=*q;
+//    return min;
+//}
+//
+//int main()
+//{
+//    int min,num[6]={3,6,20,9,12,2};
+//    min=find_min(num,6);
+//    printf("%d\n",min);
+//    return 0;
+//}
+
+
+//#include <stdio.h>
+//
+//int main(void) {
+//
+//    int x, y, z, u, v;
+//    scanf("%d%d%d", &x, &y, &z);
+//    if (x > y)
+//        u = x;
+//    else
+//        u = y;
+//
+//    if (u>z)
+//        v = u;
+//    else
+//        v = z;
+//    printf("%d\n", v);
+//    return 0;
+//}
+
+//#include <stdio.h>
+
+//*odd存储奇数和，*even存储偶数和
+//void sum(int x, int *odd, int *even)
+//{
+//    if (x % 2)
+//        *odd += x;
+//    else
+//        *even += x;
+//}
+//int main()
+//{
+//    int x, i, odd = 0, even = 0;
+//    for (i=0; i<10; i++) {
+//        scanf("%d", &x);
+//        sum(x, &odd, &even);
+//    }
+//    printf("%d, %d\n", odd, even);
+//    return 0;
+//}
+
+//#include <stdio.h>
+//int main( )
+//{
+//    int n, i, sum;
+//    for (n=100; n<1000; n++)
+//    {
+//        sum = 0;
+//        for (i=1; i<n; i++)
+//            if (n%i == 0)
+//                sum +=i;
+//        if (sum == n)
+//            printf("%5d", n);
+//    }
+//    return 0;
+//}
+
+//#include <stdio.h>
+//void find(int *, int, int *, int *);
+//
+//int main(void)
+//{
+//    int maxsub, minsub, a[]={5, 3, 7, 9, 2, 0, 4, 1, 6, 8};
+//
+//    find(a, 10, &maxsub, &minsub);
+//    printf("%d,%d\n", maxsub, minsub);
+//
+//    return 0;
+//}
+//
+//void find(int *a, int n, int *maxsub, int *minsub)
+//{
+//    int i;
+//
+//    *maxsub = *minsub = 0;
+//    for (i = 1; i < n; i++){
+//        if (a[i] > a [*maxsub]){
+//            *maxsub = i;
+//        }
+//        if (a[i] < a [*minsub]){
+//            *minsub = i;
+//        }
+//    }
+//
+//    return;
+//}
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//    int year,leapyear;
+//    scanf("%d",&year);
+//    if(year%4)
+//        leapyear=0;
+//    else
+//    {
+//        if((year%100==0) && (year%400!=0))
+//            leapyear=0;
+//        else
+//            leapyear=1;
+//    }
+//    if(leapyear)
+//        printf("%d是闰年",year);
+//    else
+//        printf("%d不是闰年",year);
+//    return 0;;
+//}
+
+//#include <stdio.h>
+//int main(int price) {
+//    switch (price) {
+//        case 1:
+//            price = 3.0;
+//            break;
+//        case 2:
+//            price = 2.5;
+//            break;
+//
+//        case 3:
+//            price = 4.0;
+//            break;
+//        case 4:
+//            price = 3.5;
+//            break;
+//        default:
+//            price = 0.0;
+//            break;
+//    }
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int a, b, i, temp;
+//    do
+//    {
+//        printf("Input a, b(a>0, b>0): ");
+//        scanf("%d, %d", &a, &b);
+//    }while(a<=0 ||b<=0);
+//    if(a>b)
+//    {
+//        temp=a;
+//        a=b;
+//        b=temp;
+//    }
+//    for(i=a; i<=b; i++)
+//    {
+//        if(i%a==0 && i%b==0)
+//            printf("%d ",i);
+//    }
+//    printf("\n");
+//    return 0;
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//    int a, b, c, max;
+//
+//    scanf("%d %d %d", &a, &b, &c);
+//    max = 0;
+//    if ( a > b ) {
+//        if ( a > c ) {
+//            max = a;
+//        } else {
+//            max = c;
+//
+//        }
+//    } else {
+//        if (b > c) {
+//            max = b;
+//        } else {
+//            max = c;
+//        }
+//    }
+//    printf("%d\n", max);
+//
+//    return 0;
+//}
+
+//// 单选:
+////已知int i, a; 执行语句i=(a=2*3,a*5),a+6;后，变量i的值是:
+//int main(){
+//
+//    int i, a;
+////    逗号表达式:先计算左边的部分,再计算右边的部分,最后返回右边的部分
+////    由于逗号表达式的特性,所以i的值是a*5,即6*5=30
+////    所以i的值是30,不要被后面的a+6迷惑,a+6是一个表达式,不会影响i的值
+//    i=(a=2*3,a*5),a+6;
+//    printf("%d\n",i);
+//    return 0;
+//}
+
+//int main()
+//{
+//    int i = 32777;
+//    short si = i;
+//    int j = si;
+//
+//    printf("%d\n",j);
+//    return 0;
+//}
+//这段代码的输出结果是 `-32759`，原因是 **数据类型的截断和溢出**。让我们逐步分析代码的执行过程：
+
+/**
+//代码分析
+```c
+int main() {
+    int i = 32777;  // i 是一个 int 类型的变量，值为 32777
+    short si = i;   // 将 int 类型的 i 赋值给 short 类型的 si
+    int j = si;     // 将 short 类型的 si 赋值给 int 类型的 j
+
+    printf("%d\n", j);  // 输出 j 的值
+    return 0;
+}
+```
+
+---
+
+### 关键点
+1. **`int` 和 `short` 的范围**：
+- `int` 类型通常是 4 字节（32 位），范围是 `-2147483648` 到 `2147483647`。
+- `short` 类型通常是 2 字节（16 位），范围是 `-32768` 到 `32767`。
+
+2. **`32777` 的二进制表示**：
+- `32777` 的二进制表示为：
+```
+00000000 00000000 10000000 00001001
+```
+- 由于 `short` 类型只有 2 字节（16 位），当将 `32777` 赋值给 `short` 类型时，会发生 **截断**，只保留低 16 位：
+```
+10000000 00001001
+```
+
+3. **截断后的值**：
+- 截断后的二进制 `10000000 00001001` 是一个有符号的 `short` 类型值。
+- 最高位是 `1`，表示这是一个负数。
+- 计算其十进制值：
+- 先取反加一（补码转原码）：
+```
+10000000 00001001 （补码）
+01111111 11110111 （取反）
+01111111 11111000 （加一，得到原码）
+```
+- 原码对应的十进制值是 `32760`，但由于最高位是 `1`，表示负数，因此实际值是 `-32760 + (-1) = -32759`。
+
+4. **赋值给 `j`**：
+- `si` 的值是 `-32759`，将其赋值给 `int` 类型的 `j` 时，`j` 的值也是 `-32759`。
+
+5. **输出**：
+- `printf("%d\n", j);` 输出 `j` 的值，即 `-32759`。
+
+
+### 总结
+        代码输出 `-32759` 的原因是：
+1. **截断**：将 `int` 类型的 `32777` 赋值给 `short` 类型时，发生了截断，只保留了低 16 位。
+2. **溢出**：截断后的值 `10000000 00001001` 是一个有符号的 `short` 类型值，表示 `-32759`。
+3. **赋值**：将 `short` 类型的 `-32759` 赋值给 `int` 类型的 `j`，`j` 的值仍然是 `-32759`。
+
+
+### 如何避免
+        如果需要避免这种问题，可以：
+1. 确保赋值时不会发生溢出或截断。
+2. 使用更大的数据类型（如 `int` 或 `long`）来存储值。
+3. 在赋值前检查值是否在目标类型的范围内。
+
+例如：
+```c
+int main() {
+    int i = 32777;
+    if (i >= -32768 && i <= 32767) {  // 检查是否在 short 范围内
+        short si = i;
+        int j = si;
+        printf("%d\n", j);
+    } else {
+        printf("Value out of range for short!\n");
+    }
+    return 0;
+}
+**/
+
+
+
+//判断：
+//分号是C语言中语句的结束符，不可用作分隔符：F,输入语句中的分号就可以是分隔符
+//C语言中的变量名属于标识符：T; 标识符是由字母、数字和下划线组成的字符串，且不能以数字开头：T
+//C语言中3/2的值是1。T: 因为整数除法结果是整数，3/2的结果是1
+//C语言中，8<10<0 是不符合C的语法规则的表达式，无法计算其值。F: 8<10<0是合法的表达式，但是其值是0(假)
+//在C语言中，"A"和'A'等价。 F: "A"是字符串，'A'是字符
+//C 语言的标识符由字母、数字和其他任意字符组成。F: C 语言中，变量名可以由字母、数字和下划线组成，但不能以数字开头。
+//在switch语句中，不一定使用break语句。T: 在switch语句中，如果没有break语句，程序会继续执行下一个case语句。
+//⭐可以用一个指针变量指向一个函数，然后通过该指针变量调用此函数。  T: 函数指针是指向函数的指针变量，可以通过函数指针调用函数。
+//按照C语言的规定，在参数传递过程中，既可以将实参的值传递给形参，也可以将形参的值传递给实参，这种参数传递是双向的。F: C语言中，参数传递是单向的，
+//只能将实参的值传递给形参，不能将形参的值传递给实参。
+//指针数组的每个元素都是一个指针变量。  T: 指针数组是一个数组，数组的每个元素都是一个指针变量。
+//在 C 程序中，9ab是非法的用户标识符。  T: C语言中，标识符不能以数字开头，9ab是非法的用户标识符。
+//C程序中的main函数必须放在整个程序的最前头。 F: C程序中的main函数可以放在程序的任意位置，但是main函数只能有一个。
+//执行以下程序段，输入1.0  0.01  365，输出1.0#0.010#365。T:
+// 该程序段使用了格式化输入输出函数scanf和printf，可以实现输入1.0 0.01 365，输出1.0#0.010#365。
+//如果变量已经正确定义，则执行以下程序段后，x的值不变。
+//if (x = 20) {
+//y = 1;
+//} else {
+//y = 0;
+//}
+// F: 该程序段中的if语句中使用了赋值运算符=而不是比较运算符==，导致x的值被赋值为20，y的值被赋值为1。
+//在C语言中，可以将主调函数放在被调函数的后面，省略函数的声明。
+// T: 在C语言中，主调函数必须放在被调函数的前面，否则需要提前声明函数。
+//执行语句int *p = 1000;后，指针变量p指向地址为1000的变量。 F: 指针变量p指向的是地址，而不是具体的值，因此应该使用int *p = &a;。
+//在C程序中,逗号运算符的优先级最低. T: 逗号运算符的优先级最低
+
+
+//// 被调函数已经声明，（主调函数在被调函数后面，不需要提前声明函数。）
+//int add(int a, int b) {  // 被调函数
+//    return a + b;
+//}
+//
+//#include <stdio.h>
+//int main() {
+//    int result = add(3, 4);  // 调用add函数
+//    printf("Result: %d\n", result);
+//    return 0;
+//}
+
+//int x=3,y=2;printf("%d",x*=y+8);输出为30.
+// T: x*=y+8等价于x=x*(y+8)=3*(2+8)=30
+
+//int main()
+//{
+//int i=20;
+//switch(i/10) {
+//    case 2:
+//        printf("A");
+//    case 1:
+//        printf("B");
+//    }
+//}
+//输出为AB。T: switch语句中，如果没有break语句，程序会继续执行下一个case语句。
+//### 代码分析
+//
+//```c
+//#include <stdio.h>
+//
+//int main() {
+//    int i = 20;
+//    switch(i / 10) {
+//        case 2:
+//            printf("A");
+//        case 1:
+//            printf("B");
+//    }
+//    return 0;
+//}
+//```
+//
+//### 代码执行过程
+//
+//1. **计算 `i / 10`**：
+//- `i` 的值是 `20`，所以 `i / 10` 的结果是 `2`（整数除法）。
+//
+//2. **进入 `switch` 语句**：
+//- `switch(i / 10)` 会根据 `i / 10` 的值（即 `2`）来选择执行哪个 `case` 分支。
+//
+//3. **匹配 `case 2:`**：
+//- 因为 `i / 10` 的结果是 `2`，所以程序会跳转到 `case 2:` 分支。
+//- 执行 `printf("A");`，输出 `A`。
+//
+//4. **继续执行后续代码**：
+//- 由于 `case 2:` 分支没有 `break` 语句，程序会继续执行下一个 `case` 分支（即 `case 1:`），这称为“**贯穿**”（fall-through）。
+//- 执行 `printf("B");`，输出 `B`。
+//
+//5. **结束 `switch` 语句**：
+//- 执行完 `case 1:` 后，`switch` 语句结束。
+//
+//### 输出结果
+//- 由于 `case 2:` 和 `case 1:` 都会被执行，程序的输出是 `AB`。
+//
+//---
+//
+//### `switch(i/10)` 的解释
+//
+//`switch(i / 10)` 中的 `i / 10` 是 `switch` 语句的参数，它决定了程序会跳转到哪个 `case` 分支。`switch` 的参数可以是以下类型：
+//
+//1. **整数类型**：
+//- `int`、`char`、`short`、`long` 等整数类型。
+//- 例如：`switch(i)`、`switch(ch)`（`ch` 是 `char` 类型）。
+//
+//2. **表达式**：
+//- 任何结果为整数的表达式。
+//- 例如：`switch(i / 10)`、`switch(a + b)`。
+//
+//3. **枚举类型**：
+//- `enum` 类型的值。
+//- 例如：
+//```c
+//enum Color { RED, GREEN, BLUE };
+//enum Color c = RED;
+//switch(c) {
+//case RED: printf("Red"); break;
+//case GREEN: printf("Green"); break;
+//case BLUE: printf("Blue"); break;
+//}
+//```
+//
+//---
+//
+//### `switch()` 的参数可以是什么？
+//
+//`switch()` 的参数必须是一个**整型表达式**，即它的结果必须是整数类型。具体来说：
+//
+//1. **整数常量或变量**：
+//- 例如：`switch(1)`、`switch(i)`。
+//
+//2. **表达式**：
+//- 例如：`switch(i + 1)`、`switch(i % 2)`。
+//
+//3. **字符类型**：
+//- 字符在 C 语言中本质上是整数（ASCII 值），所以可以作为 `switch` 的参数。
+//- 例如：
+//```c
+//char ch = 'A';
+//switch(ch) {
+//case 'A': printf("A"); break;
+//case 'B': printf("B"); break;
+//}
+//```
+//
+//4. **枚举类型**：
+//- 枚举类型的值本质上是整数，因此可以作为 `switch` 的参数。
+//- 例如：
+//```c
+//enum Day { MON, TUE, WED };
+//enum Day d = MON;
+//switch(d) {
+//case MON: printf("Monday"); break;
+//case TUE: printf("Tuesday"); break;
+//}
+//```
+//
+//---
+//
+//### 注意事项
+//
+//1. **`case` 标签必须是常量**：
+//- `case` 后面的值必须是常量，不能是变量或表达式。
+//- 例如：
+//```c
+//int x = 1;
+//switch(i) {
+//case x: // 错误，x 是变量
+//case 1: // 正确，1 是常量
+//}
+//```
+//
+//2. **`break` 语句**：
+//- 如果没有 `break`，程序会继续执行后续的 `case` 分支（贯穿）。
+//- 例如：
+//```c
+//switch(i) {
+//case 1:
+//printf("A");
+//// 没有 break，会继续执行 case 2
+//case 2:
+//printf("B");
+//break;
+//}
+//```
+//
+//3. **`default` 分支**：
+//- 如果没有任何 `case` 匹配，可以执行 `default` 分支。
+//- 例如：
+//```c
+//switch(i) {
+//case 1: printf("A"); break;
+//case 2: printf("B"); break;
+//default: printf("Other"); break;
+//}
+//```
+//
+//---
+//
+//### 总结
+//
+//- `switch(i / 10)` 中的 `i / 10` 是一个整数表达式，结果为 `2`，因此程序会跳转到 `case 2:` 分支。
+//- `switch()` 的参数可以是整数类型、字符类型、枚举类型或任何结果为整数的表达式。
+//- 如果没有 `break`，程序会继续执行后续的 `case` 分支（贯穿）。
+//- `case` 标签必须是常量，不能是变量或表达式。
+
+//for(;;);是错误的. F: for(;;); 是一个死循环，会一直执行分号后面的空语句，不会报错。
+
+//结构体成员的类型必须是基本数据类型。
+// F: 结构体成员的类型可以是基本数据类型、数组、指针、结构体等。
+//当调用函数时，实参是一个数组名，则向函数传送的是数组的长度。
+// F: 当调用函数时，实参是一个数组名，则向函数传送的是数组的首地址，而不是数组的长度。
+//scanf()函数中格式字符s的功能用来输入字符串。
+// T: scanf()函数中格式字符s的功能是输入字符串，但是s前面需要加%。
+//int main() {
+//    int i, sum;
+//    for (i = 1; i <= 10; i++) {
+//        sum = sum + i;
+//    }
+//    printf("%d\n", sum);
+//}
+//F: 程序中的sum变量没有初始化，所以sum的值是随机的。
+//for(i=0;i<9;i++)能控制循环10次.
+// F: for(i=0;i<9;i++)只能控制循环9次，因为i的初始值是0，i<9时循环，i=0,1,2,3,4,5,6,7,8，共9次。
+
+//执行以下程序段后，x的值为0，y的值为1。
+//#include "stdio.h"
+//int main() {
+//    int x, y;
+//    if (x = 0) //x被赋值为0（即假），if条件判断为假
+//        y = 0;
+//    else
+//        y = 1;
+//    printf("%d,%d\n", x, y);
+//}
+// T: 程序中的if条件判断为假，所以y的值是1，x的值是0。
+//以下两个程序段等价，其功能是计算 s=1+3+5+7+9。
+/* 程序段A*/
+//int main() {
+//    int s = 0;
+//    int i = 0;
+//    while (i < 10) {
+//        i++;
+//        if (i % 2 == 0) {
+//            continue;
+//        }
+//        s = s + i;
+//        printf("%d\n", s);
+//    }
+//}
+
+/* 程序段B */
+//int main(){
+//    int s = 0;
+//    int i = 0;
+//    while(i < 10){
+//        i++;
+//    if(i % 2 != 0){
+//        s = s + i;
+//        printf("%d\n",s);
+//    }
+//    }
+//}
+// T: 程序段A和程序段B的功能是计算s=1+3+5+7+9，两个程序段等价。
+
+//可以使用switch-case的结构，都可以转换为if-else。反之，不成立。
+// T: switch-case结构可以转换为if-else结构，但是if-else结构不一定能转换为switch-case结构。
+//调用scanf()函数进行字符数组输入时,空格和换行符都可以作为字符串的一部分而能读入.
+//F: 调用scanf()函数进行字符数组输入时，空格和换行符都会终止字符串的输入，不会读入。
+//数组定义后，只能引用单个的数组元素，而不能一次引用整个数组。
+//F: 数组定义后，可以引用单个的数组元素，也可以一次引用整个数组。
+//虽然不能直接“引用”整个数组作为一个整体进行操作，但通过指针、循环、标准库函数和函数传递等方式，可以间接地对整个数组或其多个元素进行各种操作.
+//表达式 (j=3, j++) 的值是4.
+//F: 表达式 (j=3, j++) 的值是3，逗号运算符的结果是最后一个表达式的值。
+
+//#include "stdio.h"
+//int main(){
+//    int j;
+//    j = (j=3, j++); //逗号表达式：j++的值是3，j的值自增后是4，
+////    但此时j++返回的值是3，所以j的值是3（返回3之后才自增）
+//
+//    printf("%d\n",j);
+//    return 0;
+//}
+//if(strcmp(temp,str)>0)中的条件是当字符串temp大于字符串str为真时.
+// T: strcmp()函数的返回值是整数，当字符串temp大于字符串str时，strcmp()返回正整数，条件为真。
+//`strcmp()` 是C语言标准库中的一个函数，用于比较两个字符串。它按照字典顺序对两个字符串进行比较，并返回一个整数来表示比较的结果。以下是 `strcmp()` 函数的详细讲解：
+//
+// 函数原型：
+//int strcmp(const char *str1, const char *str2);
+//
+// 参数：
+//- **str1**：指向第一个要比较的字符串的指针。
+//- **str2**：指向第二个要比较的字符串的指针。
+//
+// 返回值:
+//- **返回值小于0**：表示 `str1` 小于 `str2`。
+//- **返回值等于0**：表示 `str1` 等于 `str2`。
+//- **返回值大于0**：表示 `str1` 大于 `str2`。
+//
+// 比较过程:
+//- `strcmp()` 函数从两个字符串的第一个字符开始比较，逐个字符进行比较，直到遇到不同的字符或字符串结束符 `'\0'`。
+//- 比较是基于字符的ASCII值进行的。例如，字符 `'a'` 的ASCII值是97，字符 `'b'` 的ASCII值是98，因此 `'a'` 小于 `'b'`。
+//- 如果两个字符串在某个位置的字符不同，则根据这两个字符的ASCII值来确定字符串的大小关系。
+//- 如果两个字符串在所有字符位置都相同，则认为这两个字符串相等。
+//
+// 示例:
+//#include <stdio.h>
+//#include <string.h>
+//
+//int main() {
+//    char str1[] = "apple";
+//    char str2[] = "banana";
+//    char str3[] = "apple";
+//
+//    int result1 = strcmp(str1, str2);
+//    int result2 = strcmp(str1, str3);
+//    int result3 = strcmp(str2, str1);
+//
+//    printf("strcmp(str1, str2) = %d\n", result1);  // 输出小于0
+//    printf("strcmp(str1, str3) = %d\n", result2);  // 输出等于0
+//    printf("strcmp(str2, str1) = %d\n", result3);  // 输出大于0
+//
+//    return 0;
+//}
+
+// 输出结果：
+//- `strcmp(str1, str2) = -1`：表示 `"apple"` 小于 `"banana"`。
+//- `strcmp(str1, str3) = 0`：表示 `"apple"` 等于 `"apple"`。
+//- `strcmp(str2, str1) = 1`：表示 `"banana"` 大于 `"apple"`.
+//
+//// 应用场景：
+//- 字典排序：`strcmp()` 可以用于实现字符串的字典排序。
+//- 字符串比较：在需要比较两个字符串是否相等或大小关系时，`strcmp()` 是一个非常方便的工具。
+
+//两个字符串中的字符个数相同时才能进行字符串大小的比较
+// F: 两个字符串中的字符个数不需要相同，可以进行字符串大小的比较。
+//下面这段程序，将循环有限次，在打印输出有限行之后，程序将正常结束。
+//#include "stdio.h"
+//int main(){
+//    for(long num=1; num>0; num++)
+//        printf("%ld\n", num);
+//    return 0;
+//}
+// T: 该程序中的循环条件是 `num > 0`，由于 `num` 是 `long` 类型，
+// 它的取值范围是 `-9223372036854775808` 到 `9223372036854775807`，所以循环次数是有限的。
+
+//switch语句中break语句是必须的。  F: 在switch语句中，break语句是可选的，可以选择是否使用break语句。
+//default 在switch选择结构中是必须的。  F: default在switch选择结构中是可选的，可以选择是否使用default分支。
+//假设运算符'*'和'%'都是右结合的，则表达式 (3*5%3) 的值为6。
+// T: 运算符`*`和`%`都是右结合的，所以表达式`(3*5%3)`的计算顺序是`3*(5%3)`，结果是6。
+// 有一段程序如下：
+//int getSum(int k){
+//    int s;
+//    s = getSum(k+1) + k;
+//    return s;
+//}
+//int main(){
+//    int sum;
+//    sum = getSum(0);
+//    return 0;
+//}
+// 该程序会陷入无限递归，导致栈溢出。F: 该程序会陷入无限递归，但不会导致栈溢出，因为递归的层数是有限的。
+//设变量已正确定义，执行以下程序段，顺序输入三个字符'k'，则输出k。
+//scanf("%c%c%c", &ch1, &ch2, &ch3);
+//printf("%c", ch2);
+//T: 该程序段使用了scanf()函数，可以顺序输入三个字符'k'，然后输出第二个字符'k'。
+//赋值语句a=b，是把变量b的值赋给变量a，变量b的值如果发生变化，a的值也一定跟着变化。
+// F: 赋值语句a=b，是把变量b的值赋给变量a，变量b的值发生变化，a的值不会跟着变化。
+//这个操作是单向的，即它只是在赋值时刻将 `b` 的值复制到 `a` 中。之后，变量 `a` 和变量 `b` 是独立的，它们各自的变化不会相互影响。
+//以下这段代码有编译错误，因为C语言不允许重复定义同名变量，两处int k的定义是冲突的。
+//#include <stdio.h>
+//int main(){
+//    int k=3;
+//    int i=1;
+//    while(i<5){
+//        int k; // 重复定义同名变量:局部变量k，不影响全局变量k
+//        k = i+5;
+//        i++;
+//        printf("%d", k);
+//    }
+//    printf("%d\n", k);
+//    return 0;
+//}
+//F：C语言允许在不同的作用域中定义同名变量，局部变量和全局变量可以同名，不会冲窫。
+//以下代码在Dev C++中可以运行。
+//int main() {
+//    int a[3] = {1, 2, 3};
+//
+//    printf("%d", a[3]);
+//}
+//T：该代码可以运行，但是会输出一个随机值，因为数组a的长度是3，下标从0开始，a[3]是数组a的第4个元素，超出了数组的范囟。
+//数组的下标可以是一个表达式，但是表达式计算得到的值必须是一个整数。
+//T: 数组的下标可以是一个表达式，但是表达式计算得到的值必须是一个整数。
+//C语言的头文件的扩展名是.c
+//F: C语言的头文件的扩展名是.h，C语言的源文件的扩展名是.c。
+//关系运算符“<“优先级高于关系运算符”==”。T: 关系运算符“<”的优先级高于关系运算符“==”。
+
+//程序填空题：
+//请写出与以下for语句等价的while语句。
+//int main() {
+//    sum = 0;
+//    for (i = 1; i <= n; i++) {
+//        sum = sum + i;
+//    }
+//}
+
+//sum = 0;
+//⭐填空1：初始化i
+//i = 1;
+//while (i <= n){
+//⭐填空2：sum = sum + i;
+//sum = sum+i;
+//⭐填空3：i自增
+//i++;
+//}
+
+//⭐假设三角形的三边分别为 a、 b、 c, 周长的一半为 s = (a+b+c) / 2, 则三角形面积area =
+//  s(s−a)(s−b)(s−c)
+//  下列程序的功能是根据输入的三边长, 计算相应三角形的面积。
+
+//#include<stdio.h>
+////⭐填空1：sqrt()函数需要引入math.h头文件
+//#include <math.h>
+//
+//int main()
+//{
+//    float a, b, c, s, area;
+//    printf("请输入三边长:\n");
+//    scanf("%f %f %f", &a, &b, &c);
+////    ⭐填空2：计算周长的一半，题目已经给了公式
+//    s=
+//            (a+b+c)/2;
+////    ⭐填空3：计算三角形面积，使用sqrt()函数带入公式
+//    area=
+//            sqrt(s*(s-a)*(s-b)*(s-c));
+//    printf("area=%f\n", area);
+//    return 0;
+//}
+
+//编程求 100以内能被 7 整除的所有整数，请填空完成相应功能。
+//#include <stdio.h>
+//int main()
+//{
+//    int n;
+////    ⭐填空1：初始化n:100以内: n<=100
+//    for(n = 7; n <= 100; n++)
+//    {
+////    ⭐填空2：判断n是否能被7整除：n%7!=0
+//        if(n % 7 != 0)
+//            continue;
+//        printf("%d\n", n);
+//    }
+//
+//    return 0;
+//}
+
+//编写一个函数，使输入的一个字符串按反序存放，并在主函数中输入和输出该字符串。
+//#include<stdio.h>
+//void main()
+//{
+//    void inverse(char cstr[]);
+//    char str[80];
+//    gets(str);
+//    inverse(str);
+//    puts(str);
+//}
+//void inverse(char cstr[])
+//{
+//    char ct;// 使用临时变量ct保存左端字符
+//    int i,j;
+////    ⭐填空1：初始化i和j：i<j
+//    for(i=0,j=strlen(cstr); i<j; i++,j--)
+//    {
+//        ct=cstr[i];
+////    ⭐填空2：将右端字符赋值给左端：交换cstr[i]和cstr[j-1]
+//        cstr[i]=cstr[j-1]; //将右端字符赋值给左端：交换cstr[i]和cstr[j-1]
+//        cstr[j-1]=ct;// 将临时变量中的字符（即原来左端的字符），左端字符赋值给右端
+//    }
+//}
+
+//指针输入/输出一维数组元素:本题目用指针变量输入、输出数组arrA的元素值。
+
+//#include <stdio.h>
+//int main(void)
+//{
+//    int *ptr, arrA[5];
+//    //读入数组元素
+//    for ( ptr=arrA; ptr<arrA+5; ptr++)
+////    ptr=arrA:将指针ptr指向数组arrA的首地址（第一个元素（的地址））
+////    ptr<arrA+5:指针ptr小于数组arrA的末地址（最后一个元素（的地址））
+////    ptr++:指针ptr自增，指向下一个元素（的地址）
+//    {
+////     ⭐填空1：输入数组元素:scanf("%d",ptr);
+//        scanf("%d",ptr);
+////      解释：为什么这里不需要取地址符&？：因为ptr已经指向了arrA的首地址，
+////      ptr本身就是一个地址，所以不需要再取地址符&。 （使用指针指向的已经是地址了）
+////      如果使用&arrA[i]，则需要取地址符&，因为arrA[i]是一个变量，需要取地址符&。
+////即：需要 & 的情况：操作对象是普通变量（非指针变量），例如 int num;。
+////   不需要 & 的情况：操作对象是指针变量，且指针已经指向目标内存地址，例如 int *ptr = arr;
+//    }
+//    //输出数组元素
+////    ⭐填空2：输出已经存入的数组元素，将arrA赋值给ptr即可，填:ptr=arrA
+//    for (ptr=arrA; ptr<arrA+5; ptr++)
+////    这个for循环的作用同上。
+//    {
+//        printf("%d ",*ptr);
+//    }
+//    printf("\n");
+//
+//    return 0;
+//}
+
+//角色互换:输入2个整数a和b，交换它们的值。要求定义和调用函数swap( int *pa, int *pb)实现。
+//# include <stdio.h>
+////注意函数的声明和定义是不同的：（声明是告诉编译器存在这样一个函数以及参数的类型）
+//// 这里是函数声明:声明函数swap的类型和参数
+//void swap( int *pa, int *pb );
+//
+//int main( )
+//{
+//    int a, b;
+//
+//    scanf ( "%d%d", &a, &b);
+////    ⭐填空1：调用swap函数:传入参数：使用取地址符获取a,b的地址
+//    swap( &a, &b );
+//    printf("%d %d\n", a, b);
+//}
+////这里是函数定义：（定义是实现函数的具体功能，如这里是实现交换值功能）
+//void swap ( int *pa, int *pb )
+//{
+////    ⭐填空2：交换pa和pb的值：使用临时变量temp
+//    int temp; /* 定义整型变量 temp */
+////    ⭐填空3：交换pa和pb的值：使用*pa和*pb
+//    temp = *pa; /* 分别相互赋值，实现值的交换 */
+//    *pa = *pb;
+//    *pb = temp;
+//}
+
+//输入年，输出该年每个月的天数。其中1、3、5、7、8、10、12月有31天，4、6、9、11月有30天，2月平年有28天，闰年有29天。
+//判断闰年的条件是：能被 4 整除但不能被 100 整除，或者能被 400 整除。
+//#include <stdio.h>
+//int main()
+//{
+//    int day, month, year;
+//
+//    scanf("%d", &year);
+//    for(month = 1; month <= 12; month++){
+////      ⭐填空1：判断2月的天数:传入switch要选择的对象：月份month
+//        switch (month){
+//            case 2:
+//                if((year % 4 == 0 && year % 100 != 0)||year % 400 == 0 ) {
+//                    day = 29;
+//                }else{
+//                    day = 28;
+//                }
+//                break;
+////      ⭐填空2：有31天的月份的天数：1、3、5、7、8、10、12月的天数:case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+//                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+//                day = 31; break;
+////      ⭐填空3：有30天的月份的天数：4、6、9、11月的天数:case 4: case 6: case 9: case 11:
+//            case 4: case 6: case 9: case 11:
+//                day = 30; break;
+//        }
+//        printf("%d ", day) ;
+//    }
+//
+//    return 0;
+//}
+
+//输入一个2位数a，计算出它的2位数字之和赋值给b
+
+//#include <stdio.h>
+//int main()
+//{
+//    int a,b;
+//⭐填空1：输入一个2位数a：scanf("%d",&a);
+//    scanf("%d",&a);
+//⭐填空2：计算a的2位数字之和赋值给b：b = a/10 + a%10;
+// 利用整除和取余运算，a/10得到a的十位数（只保留十位的整数部分），a%10得到a的个位数，相加得到a的2位数字之和
+//    b = a/10 + a%10;
+
+//    printf("%d",b);
+//    return 0;
+//}
+/*在C语言中，`a % 10` 是一种常见的操作，用于获取整数 `a` 的个位数字。这是因为 `%` 是**取模运算符**，它的作用是计算两个数相除后的余数。
+### 为什么 `a % 10` 能得到 `a` 的个位部分？
+1. **取模运算的定义**：
+   - `a % 10` 表示 `a` 除以 `10` 后的余数。
+   - 例如，如果 `a = 123`，那么 `123 % 10` 的结果是 `3`，因为 `123` 除以 `10` 的余数是 `3`。
+
+2. **十进制数的性质**：
+   - 在十进制数系统中，一个数的个位数字就是它除以 `10` 后的余数。
+   - 例如：
+     - `123 % 10 = 3`（个位是 `3`）
+     - `456 % 10 = 6`（个位是 `6`）
+     - `789 % 10 = 9`（个位是 `9`）
+
+3. **数学原理**：
+   - 任何整数 `a` 都可以表示为：
+     ```
+     a = 10 * quotient + remainder
+     ```
+     其中：
+     - `quotient` 是 `a` 除以 `10` 的商。
+     - `remainder` 是 `a` 除以 `10` 的余数。
+   - 由于 `10 * quotient` 一定是 `10` 的倍数，因此 `remainder` 就是 `a` 的个位数字。
+
+---
+
+### 示例
+假设 `a = 1234`：
+1. `1234 % 10` 计算过程：
+   - `1234 / 10 = 123`（商）
+   - `1234 % 10 = 4`（余数）
+   - 所以 `1234 % 10 = 4`，`4` 就是 `1234` 的个位数字。
+
+2. 如果 `a = 567`：
+   - `567 % 10 = 7`，`7` 就是 `567` 的个位数字。
+
+---
+
+### 总结
+- `a % 10` 能够得到 `a` 的个位数字，是因为取模运算 `%` 计算的是 `a` 除以 `10` 的余数。
+- 在十进制数系统中，一个数除以 `10` 的余数就是它的个位数字。
+- 这是一种简单且高效的方法，常用于提取整数的个位数字。
+
+---
+
+### 扩展：提取其他位数字
+如果你想提取整数的其他位数字，可以结合 `/` 和 `%` 运算符：
+1. **十位数字**：
+   - `(a / 10) % 10`
+   - 例如，`1234 / 10 = 123`，`123 % 10 = 3`，所以十位数字是 `3`。
+
+2. **百位数字**：
+   - `(a / 100) % 10`
+   - 例如，`1234 / 100 = 12`，`12 % 10 = 2`，所以百位数字是 `2`。
+
+3. **千位数字**：
+   - `(a / 1000) % 10`
+   - 例如，`1234 / 1000 = 1`，`1 % 10 = 1`，所以千位数字是 `1`。
+
+通过这种方式，可以轻松提取整数的任意位数字。*/
+
+//打印前5行的乘法表，我们不希望打印数字 x5这一列 的结果。请在空白处填入适当的语句，以跳过 j 等于 5 的迭代。
+//
+//程序：
+//
+//#include <stdio.h>
+//
+//int main() {
+//    int i, j;
+//    // 外层循环控制行数
+//    for (i = 1; i <= 5; i++) {
+//        // 内层循环控制列数
+//        for (j = 1; j <10; j++) {
+//            // 填空：当 j 等于 5 时，跳过当前迭代
+//            if (j == 5) {
+//
+////              ⭐填空1：跳过当前迭代:continue;
+//                continue;
+//            }
+//            printf("%d*%d=%2d ", i, j, i * j);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+//输入一个整数，根据输入，输出该整数的绝对值。限定不能调用库函数。。
+//#include <stdio.h>
+//int main(void)
+//{int x;
+////    ⭐填空1：输入一个整数：scanf("%d",&x);
+//    scanf("%d",&x);
+//    if(x>=0)
+////    ⭐填空2：输出正x：printf("%d\n",x);
+//        printf("%d\n",x);
+//    else
+////    ⭐填空3：输出-x：printf("%d\n",-x);
+//        printf("%d\n",-x);
+//
+//    return 0;
+//}
+
+//程序调用函数，从数组的元素中找出最小值并输出。
+//程序写在这里。
+//#include <stdio.h>
+//int find_min(int *p,int n)
+//{
+//    int min,*q;
+//    min=*p;
+////    ⭐填空1：填写q<p+n的条件：q<p+n（数组范围）：q指向数组元素的末地址
+//    for(q=p+1;q<p+n;q++)
+////    ⭐填空2：找出数组元素中的最小值:*q<min
+// 将最小值始终保存在min中：如果*q<min，则将*q赋值给min
+//        if(*q<min)
+//            min=*q;
+//    return min;
+//}
+//int main()
+//{
+//    int min,num[6]={3,6,20,9,12,2};
+////    ⭐填空3：调用函数find_min:find_min(这里缺参数:num,6)
+//    min=find_min(num,6);
+//    printf("%d\n",min);
+//    return 0;
+//}
+
+//假设变量已正确定义并赋值，写出满足下列条件的C语言表达式。
+//⭐填空1：(-1<=x&&x<=1)
+
+//以下程序的功能是输入三个数, 输出三个数中的最大值。请填空。
+//#include <stdio.h>
+//int main(void) {
+//    int x, y, z, u, v;
+//    scanf("%d%d%d", &x, &y, &z);
+////  ⭐填空1：找出x和y的最大值，填：x>y
+//    if (x>y)u = x;
+//    else u = y;
+////  ⭐填空2：找出u和z的最大值，填：u>z
+//    if (u>z)v = u;
+//    else v = z;
+// 因为输出的是三个数中的最大值，所以最后输出v
+//    printf("%d\n", v);
+//    return 0;
+//}
+
+////从键盘输入一组整数，对偶数和奇数分别求和。
+//#include <stdio.h>
+////*odd存储奇数和，*even存储偶数和
+//void sum(int x, int *odd, int *even)
+//{
+//    if (x % 2) //奇数：x%2==1
+////      ⭐填空1：计算奇数和,填：*odd+=x;
+//        odd += x;
+//    else
+////      ⭐填空2：计算偶数和,填：*even+=x;
+//        even += x;
+//}
+//int main()
+//{
+//    int x, i, odd = 0, even = 0;
+//    for (i=0; i<10; i++) {
+//        scanf("%d", &x);
+////       ⭐填空3：调用函数sum，传入sum的参数：(填：x, &odd, &even);
+//        sum(x, &odd, &even);
+//    }
+//    printf("%d, %d\n", odd, even);
+//    return 0;
+//}
+
+//本程序的功能是输出3位数中的所有完数。如果一个整数n等于其所有
+//因子（不含n本身）之和，则n为完数。例如，6和28都是完数，因为6=1+2+3，28=1+2+4+7+14。
+//#include <stdio.h>
+//int main( )
+//{
+//    int n, i, sum;
+////    ⭐填空1：遍历3位数：for(n=100; n<1000;填：n++)
+// 三位数的范围是100-999：n从100开始，到999结束
+//    for (n=100; n<1000;n++)
+//    {
+//        sum = 0;        /*用来保存n的因子（不含n本身）之和*/
+////    ⭐填空2：计算n的因子之和：for(i=1; i<n;填：i<n)
+//        for (i=1;i<n; i++)
+// 循环控制条件同上，i从1开始，到n-1结束，计算n的因子之和
+//            if (n%i == 0)
+//                sum +=i;
+////     ⭐填空3：判断n是否为完数：if(填：sum==n)
+// 整数n等于其所有因子之和，则n为完数：sum==n
+//        if (sum == n)
+//            printf("%5d", n);
+//    }
+//    return 0;
+//}
+
+//查找一维数组 a 的最大元素和最小元素的下标，分别存放在函数main()的maxsub和minsub变量中。
+//#include <stdio.h>
+//void find(int *, int, int *, int *);
+//
+//int main(void)
+//{
+//    int maxsub, minsub, a[]={5, 3, 7, 9, 2, 0, 4, 1, 6, 8};
+////  ⭐填空1：调用函数find:find(填：a, 10, &maxsub, &minsub);
+// 从含10个元素的数组a中找出最大元素和最小元素的下标，分别存放在maxsub和minsub变量中
+//    find(a, 10, &maxsub, &minsub);
+//    printf("%d,%d\n", maxsub, minsub);
+//
+//    return 0;
+//}
+//
+//void find(int *a, int n, int *maxsub, int *minsub)
+//{
+//    int i;
+//
+//    *maxsub = *minsub = 0;
+//    for (i = 1; i < n; i++){
+//        if (a[i] > a [*maxsub]){
+////        ⭐填空2：找出最大元素的下标i并赋值给maxsub：*maxsub=i;
+//            *maxsub = i;
+//        }
+//        if (a[i] < a [*minsub]){
+////        ⭐填空3：找出最小元素的下标i并赋值给minsub：*minsub=i;
+//            *minsub = i;
+//        }
+//    }
+//
+//    return;
+//}
+
+//本题输入年份year，判断该年是否是闰年(注意这里是公历闰年）。
+//闰年规律是：年份是4的倍数的非整百年和年份是400的倍数的整百年都是闰年，其余年份不是闰年。
+//#include <stdio.h>
+//
+//int main()
+//{
+//    int year,leapyear;
+////  ⭐填空1：输入年份：scanf("%d",填：&year);
+//    scanf("%d",&year);
+//    if(year%4!=0)
+//        leapyear=0;
+//    else
+//    {
+////      ⭐填空2：判断是否是整百年：if(year%100==0)
+//        if((year%100==0) && (year%400!=0))
+// 整百年和非400的倍数的整百年不是闰年，其余年份是闰年
+//            leapyear=0;
+//        else
+//            leapyear=1;
+//    }
+////  ⭐填空3：判断是否是闰年：if(填：leapyear)
+// leapyear为1时是闰年，为0时不是闰年：传入条件leapyear
+//    if(leapyear)
+//        printf("%d是闰年",year);
+//    else
+//        printf("%d不是闰年",year);
+//    return 0;
+//}
+
+//请写出与以下else-if语句等价的switch语句。
+//if(choice == 1){
+//price = 3.0;
+//}else if(choice == 2){
+//price = 2.5;
+//}else if(choice == 3){
+//price = 4.0;
+//}else if(choice == 4){
+//price = 3.5;
+//}else{
+//price = 0.0;
+//}
+
+//#include <stdio.h>
+//int main() {
+//    int choice;
+//    double price;
+//
+//    printf("请输入选择（1-4）：");
+//    scanf("%d", &choice);
+////  ⭐填空1：switch的参数填：choice
+//    switch (choice) {
+//        case 1:
+//            price = 3.0;
+//            break;
+//        case 2:
+//            price = 2.5;
+//            break;
+// 照着上面的格式写即可
+////  ⭐填空2：填：case 3：price = 4.0;break;
+//        case 3:
+//            price = 4.0;
+//            break;
+//        case 4:
+//            price = 3.5;
+//            break;
+////  ⭐填空3：填：default，要拼写正确
+//        default:
+//            price = 0.0;
+//            break;
+//    }
+//
+//    printf("价格是：%.1f\n", price);
+//    return 0;
+//}
+
+//输入两个正整数分别作为区间的上下限, 按由小到大的次序输出该区间内所有除
+//以 5 余数为 2 的正整数。 请在横线处填入代码, 将程序补充完整。
+//例如, 输入: 5, 30
+//输出: 7 12 17 22 27
+//#include <stdio.h>
+//int main() {
+////    ⭐填空1：缺少临时变量，填：temp
+//    int a, b, i, temp;
+//
+//    do {
+//        printf("Input a, b (a > 0, b > 0): ");
+//        scanf("%d,%d", &a, &b);
+//    } while (a <= 0 || b <= 0);  // 确保输入的 a 和 b 都大于 0
+//
+//    if (a > b) {  // 如果 a 大于 b，交换它们的值
+//        temp = a;
+//        a = b;
+//        b = temp;
+//    }
+////    ⭐填空2：缺少赋值语句，填:i=a
+// a是区间的下限，i从a开始,b是区间的上限,循环到b结束: i=a, i<=b, i++
+//    for (i = a; i <= b; i++) {
+////        ⭐填空3：判断 i 除以 5 的余数是否为 2，填：i%5==2
+//        if (i % 5 == 2) {  // 判断 i 除以 5 的余数是否为 2
+//            printf("%d", i);
+//        }
+//    }
+//
+//    printf("\n");
+//    return 0;
+//}
+
+//以下程序段判断2个整数 j 和 k 是否相等。
+////⭐填空1：填：j==k
+//if (j == k) {
+//    printf("%d = %d\n", j, k);
+////⭐填空2：填：else
+//} else {
+//    printf("%d != %d\n", j, k);
+//}
+
+//输入3个整数，输出其中最大的数。
+//#include <stdio.h>
+//int main() {
+//    int a, b, c, max;
+//    scanf("%d %d %d", &a, &b, &c);
+//
+//    if (a > b) {
+//        if (a > c) {
+////          ⭐填空1：填：max=a
+//            max = a;
+//        } else {
+////          ⭐填空2：填：max=c
+//            max = c;
+//        }
+//    } else {
+////        ⭐填空3：填：b>c
+//        if (b > c) {
+//            max = b;
+//        } else {
+////        ⭐填空4：填：max=c
+//            max = c;
+//        }
+//    }
+//
+//    printf("%d\n", max);
+//    return 0;
+//}
+
+//函数题：
+//判断小写字母：
+// 被调函数定义（函数功能实现）（手动编写）
+/* 你提交的代码也可以被嵌在这里：被调函数放在主调函数前，可不声明 */
+//int IsLower(char x) {
+//    // 小写字母的 ASCII 码范围是 97(a) 到 122(97+26=122)(z)
+//// 使用三元运算符判断是否是小写字母：如果是小写字母，返回1；否则，返回0
+//    return (x >= 'a' && x <= 'z') ? 1 : 0;
+//
+//主函数（已经给出）
+//#include <stdio.h>
+// 被调函数声明：声明函数 IsLower，函数返回值为 int，参数为 char
+// 由于被调函数放在主调函数前，也可不声明：
+//int IsLower(char x);
+
+//int main()
+//{
+//    char c;
+//    c = getchar();
+////    条件为真（1）时，输出 Y；否则，输出 N
+//    if (IsLower(c))
+//    {
+//        putchar('Y');
+//    }
+//    else
+//    {
+//        putchar('N');
+//    }
+//    putchar('\n');
+//    return 0;
+//}
+
+/* 你提交的代码将被嵌在这里 */
+
+//函数判断闰年：
+//int fun(int year) {
+//    // 判断闰年的逻辑
+//    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+//        return 1; // 是闰年，返回1
+//    } else {
+//        return 0; // 不是闰年，返回0
+//    }
+//}
+
+//使用函数求1到10的阶乘和
+//double fact(int n) {
+//    if (n <= 1) {
+//        return 1; // 0! 和 1! 都等于 1
+//    } else {
+//        return n * fact(n - 1); // 递归计算阶乘
+//    }
+//}
+
+//简单排序
+//#include <stdio.h>
+//#define N 20
+//void  sort(int x[],int n);
+//
+//int main()
+//{
+//    int a[N],n,i;
+////  输入数组元素个数：scanf("%d",&n);
+//    scanf("%d",&n);
+//    for(i=0;i<n;i++)
+////  输入数组元素：scanf("%d",&a[i]);
+//        scanf("%d",&a[i]);
+//    sort(a,n);
+//    for(i=0;i<n;i++)
+//        printf("%d ",a[i]);
+//    return 0;
+//}
+///* 请在这里填写答案 */
+//void sort(int x[], int n) {
+////  定义变量：i、j、temp用以交换元素
+//    int i, j, temp;
+////    冒泡排序：外层循环控制比较的轮数，内层循环控制每轮比较的次数
+//    for (i = 0; i < n - 1; i++) {
+////    j<n-1-i:每轮比较的次数逐渐减少,因为每轮都会将最大的元素放到最后
+////    假设已经进行了i轮比较，那么最后i个元素已经排好序，不需要再比较
+//        for (j = 0; j < n - 1 - i; j++) {
+//            if (x[j] > x[j + 1]) { // 如果顺序错误，交换两个元素
+//                temp = x[j];
+//                x[j] = x[j + 1];
+//                x[j + 1] = temp;
+//            }
+//        }
+//    }
+//}
+//即：
+//void sort(int x[],int n){
+//    int i,j,temp;
+//    //定义三个变量实现循环控制、借助临时变量交换变量：temp
+//    for(i=0;i<n-1;i++){
+//        //外层循环控制比较轮数
+//        for(j=0;j<n-1-i;j++){
+//            //内层循环控制每轮比较的次数：依次递减:j<n-i-i
+//            // 若前面的大于后面的，则交换次序：
+//            if(x[j]>x[j+1]){
+//                // 将每轮的最大值赋给temp用于后续交换
+//                temp = x[j];
+//                x[j] = x[j+1];
+//                x[j+1] = temp;
+//            }
+//        }
+//    }
+//}
+//在N个数中查找x的位置。
+//int find(int a[], int x) {
+//    for (int i = 0; i < N; i++) { // 遍历数组
+//        if (a[i] == x) {
+//            return i + 1; // 返回位置，按题意从1开始计数
+//        }
+//    }
+//    return -1; // 如果未找到，返回 -1
+//}
+//即：
+//int find(int a[], int x){
+//    // 使用for循环遍历数组元素，找到就返回i+1,否则返回-1
+//    for(int i=0;i<N;i++){
+//        if(a[i] == x){
+//            return i+1;
+//        }
+//    }
+//    // 这里默认返回-1，表示未找到
+//    return -1;
+//}
+
+////打折促销
+//double Cash(double value) {
+//    if (value >= 1000) {
+//        return value * 0.8; // 购物金额达到或超过 1000 元，打 8 折
+//    } else if (value >= 500) {
+//        return value * 0.85; // 购物金额达到或超过 500 元，打 8.5 折
+//    } else if (value >= 200) {
+//        return value * 0.9; // 购物金额达到或超过 200 元，打 9 折
+//    } else if (value >= 100) {
+//        return value * 0.95; // 购物金额达到或超过 100 元，打 9.5 折
+//    } else {
+//        return value; // 购物金额不足 100 元，无优惠
+//    }
+//}
+
+//求阶乘*
+//double Fac(int x) {
+//    if (x == 0) {
+//        return 1; // 规定 0! = 1
+//    }
+//    // 递归计算阶乘：x! = x * (x-1)!
+//    double result = 1;
+//    for (int i = 1; i <= x; i++) {
+//        result *= i; // 循环累乘计算阶乘
+//    }
+//    return result;
+//}
+//即：
+//double Fac(int x){
+//
+//    // 两种情况：x=0，x!=0
+//    // x=0，直接返回1
+//    if(x==0){
+//        return 1;
+//    }
+//    // x!=0，利用递归循环累乘,使用双精度:类型保持一致
+//    // result初始化为1，小于等于x
+//    double result = 1;
+//    for(int i = 1; i<=x;i++){
+//        result *=i;
+//    }
+//    return result;
+//}
+
+//素数
+//int prime(int x) {
+//    if (x <= 1) {
+//        return 0; // 1 及以下的数不是素数
+//    }
+//    for (int i = 2; i * i <= x; i++) { // 只需判断到 √x
+//        if (x % i == 0) {
+//            return 0; // 如果能被整除，则不是素数
+//        }
+//    }
+//    return 1; // 如果没有被整除，则是素数
+//}
+//int  prime(int x){
+//
+//    // 素数的定义：大于1的数且只能被1和它本身整除的数、
+//    // 两种情况，若x<=1,则不是素数，否则从2开始到根号下x进行判断
+//    if(x<=1){
+//        return 0;
+//    }
+//    // 从2开始到根号下x进行判断：i*i<=x
+//    for(int i=2;i*i<=x;i++){
+//        // 能被i整除，不是素数
+//        if(x%i==0){
+//            return 0;
+//        }
+//    }
+//    return 1;
+//}
+
+//jmu-c-5.1请编写一个 fun()函数, 使其实现对汇款额 x 按如下公式计算应缴的汇费。
+//float fun(int x) {
+//    if (x <= 500) {
+//        return 5.5;
+//    } else if (x <= 2000) {
+//        return 0.02 * x;
+//    } else if (x <= 5000) {
+//        return 0.008 * (x - 2000) + 40;
+//    } else {
+//        return 75.0;
+//    }
+//}
+
+//找两个数中最大者:直接用三元表达式即可
+//int max(int a, int b) {
+//    return (a > b) ? a : b;
+//}
+
+//编程题:
+//三角形面积
+//#include <stdio.h>
+//int main() {
+//    double b, h, a;
+//
+//    // 读取输入：注意double要使用%lf，float使用%f
+//    scanf("%lf %lf", &b, &h);
+//
+//    // 计算面积
+//    a = (b * h) / 2;
+//
+//    // 输出结果，保留两位小数
+//    printf("%.2f\n", a);
+//
+//    return 0;
+//}
+
+//sdut-C语言实验——整除
+//# include <stdio.h>
+//int main(){
+//
+//    int n;
+//    scanf("%d",&n);
+//    if(n%3 == 0&& n%5== 0){
+//
+//        printf("Yes");
+//
+//    }
+//    else
+//        printf("No");
+//
+//
+//    return 0;
+//}
+
+//sdut-C语言实验——温度转换
+//#include <stdio.h>
+//
+//int main() {
+//    double F, C;
+//
+//    // 读取输入的华氏温度
+//    scanf("%lf", &F);
+//
+//    // 计算摄氏温度
+//    C = 5.0 * (F - 32) / 9.0;
+//
+//    // 输出摄氏温度，保留两位小数
+//    printf("%.2lf\n", C);
+//
+//    return 0;
+//}
+
+//猜数字游戏
+//#include <stdio.h>
+//
+//int main() {
+//    int secret, N, guess, count = 0;
+//
+//    // 读取游戏机产生的随机数和猜测的最大次数N
+//    scanf("%d %d", &secret, &N);
+//
+//    while (1) {
+//        // 读取用户的猜测
+//        scanf("%d", &guess);
+//        count++; // 猜测次数加1
+//
+//        // 检查用户是否输入了负数
+//        if (guess < 0) {
+//            printf("Game Over\n");
+//            break;
+//        }
+//
+//        // 比较用户的猜测和随机数
+//        if (guess > secret) {
+//            printf("Too big\n");
+//        } else if (guess < secret) {
+//            printf("Too small\n");
+//        } else {
+//            // 用户猜对了
+//            if (count == 1) {
+//                printf("Bingo!\n");
+//            } else if (count <= 3) {
+//                printf("Lucky You!\n");
+//            } else if (count <= N) {
+//                printf("Good Guess!\n");
+//            } else {
+//                printf("Game Over\n");
+//            }
+//            break; // 结束循环
+//        }
+//
+//        // 如果猜测次数超过N次，结束游戏
+//        if (count > N) {
+//            printf("Game Over\n");
+//            break;
+//        }
+//    }
+//
+//    return 0;
+//}
+
+//字符串字母大小写转换
+//#include <stdio.h>
+//#include <ctype.h> // 包含头文件以使用字符处理函数
+//
+//int main() {
+//    char str[31]; // 定义字符数组，长度为31，最后一个为结束符'\0'
+//    int i = 0;
+//
+//    // 读取字符直到'#'，注意数组最后一个位置要留给'\0'
+//    while ((str[i] = getchar()) != '#' && i < 30) {
+//        i++;
+//    }
+//    str[i] = '\0'; // 确保字符串以空字符结束
+//
+//    // 转换大小写
+//    for (i = 0; str[i] != '\0'; i++) {
+//        if (islower(str[i])) { // 如果是小写字母
+//            str[i] = toupper(str[i]); // 转换为大写
+//        } else if (isupper(str[i])) { // 如果是大写字母
+//            str[i] = tolower(str[i]); // 转换为小写
+//        }
+//        // 其他字符不变，不需要额外处理
+//    }
+//
+//    // 输出转换后的字符串
+//    for (i = 0; str[i] != '\0'; i++) {
+//        putchar(str[i]);
+//    }
+//
+//    return 0;
+//}
+
+//计算阶乘和
+//#include <stdio.h>
+//
+//// 函数用于计算阶乘
+//long long factorial(int n) {
+//    long long fact = 1;
+//    for (int i = 1; i <= n; i++) {
+//        fact *= i;
+//    }
+//    return fact;
+//}
+//
+//int main() {
+//    int N;
+//    long long S = 0; // 使用长整型以存储阶乘和，防止溢出
+//
+//    // 读取输入的正整数N
+//    scanf("%d", &N);
+//
+//    // 计算阶乘和
+//    for (int i = 1; i <= N; i++) {
+//        S += factorial(i);
+//    }
+//
+//    // 输出阶乘和
+//    printf("%lld\n", S);
+//
+//    return 0;
+//}
+
+//交换a和b的值
+//#include <stdio.h>
+//
+//int main() {
+//    int a, b, temp;
+//
+//    // 读取输入的两个整数
+//    scanf("%d %d", &a, &b);
+//
+//    // 交换a和b的值
+//    temp = a;
+//    a = b;
+//    b = temp;
+//
+//    // 输出交换后的值
+//    printf("a=%d,b=%d\n", a, b);
+//
+//    return 0;
+//}
+
+//大小写字符转换
+//#include <stdio.h>
+//#include <ctype.h> // 包含头文件以使用字符处理函数
+//
+//int main() {
+//    char ch;
+//
+//    // 读取输入的字符
+//    scanf("%c", &ch);
+//
+//    // 检查字符并转换
+//    if (isupper(ch)) { // 如果是大写字母
+//        ch = tolower(ch); // 转换为小写
+//    } else if (islower(ch)) { // 如果是小写字母
+//        ch = toupper(ch); // 转换为大写
+//    } else {
+//        printf("error\n"); // 如果都不是，输出错误信息
+//        return 0; // 结束程序
+//    }
+//
+//    // 输出转换后的字符
+//    putchar(ch);
+//
+//    return 0;
+//}
+
+//将数组中的数逆序存放
+//#include <stdio.h>
+//
+//int main() {
+//    int n, i;
+//    int array[10]; // 定义数组，长度为10，满足题目要求
+//
+//    // 读取输入的正整数n
+//    scanf("%d", &n);
+//
+//    // 读取n个整数并存入数组
+//    for (i = 0; i < n; i++) {
+//        scanf("%d", &array[i]);
+//    }
+//
+//    // 逆序存放数组中的数
+//    for (i = 0; i < n / 2; i++) {
+//        int temp = array[i];
+//        array[i] = array[n - 1 - i];
+//        array[n - 1 - i] = temp;
+//    }
+//
+//    // 按顺序输出数组中的元素
+//    for (i = 0; i < n; i++) {
+//        printf("%d", array[i]);
+//        if (i < n - 1) {
+//            printf(" "); // 在数字之间输出空格，但最后一个数字后不输出
+//        }
+//    }
+//
+//    return 0;
+//}
+
+//输入一个三位数，输出百位、十位和各位上的数。
+//#include <stdio.h>
+//
+//int main() {
+//    int num, hundred, ten, unit;
+//
+//    // 读取输入的三位数
+//    scanf("%d", &num);
+//
+//    // 分别求出百位、十位和个位上的数
+//    hundred = num / 100;        // 百位 = 数字 / 100
+//    ten = (num / 10) % 10;      // 十位 = (数字 / 10) % 10
+//    unit = num % 10;            // 个位 = 数字 % 10
+//
+//    // 输出百位、十位和个位上的数
+//    printf("%d %d %d\n", hundred, ten, unit);
+//
+//    return 0;
+//}
+
+//求1+2+3+4+5+…+n的和值
+#include <stdio.h>
+
+// 函数声明，用于计算1到n的和
+//int fun(int n);
+//
+//int main() {
+//    int n, sum;
+//
+//    // 读取输入的整数
+//    scanf("%d", &n);
+//
+//    // 调用fun函数计算和
+//    sum = fun(n);
+//
+//    // 输出和值
+//    printf("sum = %d\n", sum);
+//
+//    return 0;
+//}
+//
+//// 函数定义，计算1到n的和
+//int fun(int n) {
+//    int i, sum = 0;
+//    for (i = 1; i <= n; i++) {
+//        sum += i;
+//    }
+//    return sum;
+//}
+
+//输出二维数组每列最小数
+//#include <stdio.h>
+//
+//int main() {
+//    int a[4][4];
+//    int i, j;
+//    int min;
+//
+//    // 读取输入
+//    for (i = 0; i < 4; i++) {
+//        for (j = 0; j < 4; j++) {
+//            scanf("%d", &a[i][j]);
+//        }
+//    }
+//
+//    // 找到每列的最小值并输出
+//    for (j = 0; j < 4; j++) {
+//        min = a[0][j]; // 假设当前列的第一个元素是最小值
+//        for (i = 1; i < 4; i++) {
+//            if (a[i][j] < min) {
+//                min = a[i][j];
+//            }
+//        }
+//        printf("%d ", min);
+//    }
+//
+//    return 0;
+//}
+
+//练习5-7：存储身份证号码
+//#include <stdio.h>
+//
+//#define ID_LENGTH 18 // 身份证号长度定义为18位
+//
+//int main() {
+//    char id[ID_LENGTH + 1]; // 定义字符数组，长度为18位加1，最后一个为结束符'\0'
+//
+//    // 读取输入的身份证号
+//    scanf("%18s", id); // 限制读取长度为18，防止溢出
+//
+//    // 输出身份证号
+//    printf("身份证号码：%s\n", id);
+//
+//    return 0;
+//}
+
+//三个整数排序
+//#include <stdio.h>
+//
+//int main() {
+//    int a, b, c, temp;
+//
+//    // 读取输入的三个整数
+//    scanf("%d %d %d", &a, &b, &c);
+//
+//    // 使用简单的冒泡排序对三个数进行排序
+//    if (a > b) { temp = a; a = b; b = temp; }
+//    if (a > c) { temp = a; a = c; c = temp; }
+//    if (b > c) { temp = b; b = c; c = temp; }
+//
+//    // 输出排序后的结果
+//    printf("%d,%d,%d\n", a, b, c);
+//
+//    return 0;
+//}
+
+//求给定数组元素的最大值
+//#include <stdio.h>
+//
+//int main() {
+//    int numbers[50]; // 定义数组存储输入的整数
+//    int count = 0;   // 计数器，记录输入的整数数量
+//    int max;        // 用于存储最大值
+//    int num;        // 临时变量，用于读取输入
+//
+//    // 读取输入直到负数或达到50个数
+//    while (count < 50) {
+//        scanf("%d", &num);
+//        if (num < 0) { // 如果输入为负数，结束输入
+//            break;
+//        }
+//        numbers[count] = num; // 存储非负整数
+//        count++;
+//    }
+//
+//    // 如果没有输入任何非负整数，输出NULL!
+//    if (count == 0) {
+//        printf("NULL!\n");
+//    } else {
+//        // 初始化最大值为第一个输入的非负整数
+//        max = numbers[0];
+//        // 遍历数组，找出最大值
+//        for (int i = 1; i < count; i++) {
+//            if (numbers[i] > max) {
+//                max = numbers[i];
+//            }
+//        }
+//        // 输出最大值
+//        printf("max=%d\n", max);
+//    }
+//
+//    return 0;
+//}
+
+//显示两句话
+//#include <stdio.h>
+//
+//int main() {
+//    // 输出第一句话
+//    printf("Everything depends on human effort.\n");
+//
+//    // 输出第二句话
+//    printf("Just do it.\n");
+//
+//    return 0;
+//}
+
+//矩阵的主对角线元素之和
+//#include <stdio.h>
+//
+//int main() {
+//    int matrix[4][4]; // 定义4x4矩阵
+//    int sum = 0;      // 主对角线元素之和
+//    int i, j;
+//
+//    // 读取4x4矩阵的元素
+//    for (i = 0; i < 4; i++) {
+//        for (j = 0; j < 4; j++) {
+//            scanf("%d", &matrix[i][j]);
+//        }
+//    }
+//
+//    // 计算主对角线元素之和
+//    for (i = 0; i < 4; i++) {
+//        sum += matrix[i][i]; // 只累加主对角线上的元素
+//    }
+//
+//    // 输出主对角线元素之和
+//    printf("%d\n", sum);
+//
+//    return 0;
+//}
+
+//判断奇偶性
+//#include <stdio.h>
+//
+//int main() {
+//    int num;
+//
+//    // 提示用户输入一个整数
+//    printf("请输入一个整数:");
+//    scanf("%d", &num);
+//
+//    // 判断奇偶性并输出结果
+//    if (num % 2 == 0) {
+//        printf("%d 是偶数。\n", num);
+//    } else {
+//        printf("%d 是奇数。\n", num);
+//    }
+//
+//    return 0;
+//}
+
+//输出一组成绩中的最高分和最低分
+//#include <stdio.h>
+//
+//int main() {
+//    int n;
+//    scanf("%d", &n); // 读取人数
+//
+//    int scores[n];
+//    for (int i = 0; i < n; i++) {
+//        scanf("%d", &scores[i]); // 读取每个成绩
+//    }
+//
+//    int max = scores[0];
+//    int min = scores[0];
+//
+//    // 遍历数组找到最高分和最低分
+//    for (int i = 1; i < n; i++) {
+//        if (scores[i] > max) {
+//            max = scores[i];
+//        }
+//        if (scores[i] < min) {
+//            min = scores[i];
+//        }
+//    }
+//
+//    // 输出最高分和最低分
+//    printf("%d %d\n", max, min);
+//
+//    return 0;
+//}
+
+//练习5-1：统计输出各个季度过生日的人数
+//#include <stdio.h>
+//
+//int main() {
+//    int birthdays[12]; // 定义长度为12的整型数组
+//    int i, quarter1 = 0, quarter2 = 0, quarter3 = 0, quarter4 = 0;
+//
+//    // 读取12个月过生日的人数
+//    for (i = 0; i < 12; i++) {
+//        scanf("%d", &birthdays[i]);
+//    }
+//
+//    // 计算每个季度过生日的人数
+//    quarter1 = birthdays[0] + birthdays[1] + birthdays[2];
+//    quarter2 = birthdays[3] + birthdays[4] + birthdays[5];
+//    quarter3 = birthdays[6] + birthdays[7] + birthdays[8];
+//    quarter4 = birthdays[9] + birthdays[10] + birthdays[11];
+//
+//    // 输出每个季度过生日的人数
+//    printf("第一季度生日的人数 = %d\n", quarter1);
+//    printf("第二季度生日的人数 = %d\n", quarter2);
+//    printf("第三季度生日的人数 = %d\n", quarter3);
+//    printf("第四季度生日的人数 = %d\n", quarter4);
+//
+//    return 0;
+//}
+
+//判断键盘输入的两个整数大小。
+//#include <stdio.h>
+//
+//int main() {
+//    int A, B;
+//
+//    // 读取两个整数
+//    scanf("%d %d", &A, &B);
+//
+//    // 比较两个整数的大小并按从大到小的顺序输出
+//    if (A > B) {
+//        printf("%d %d\n", A, B);
+//    } else {
+//        printf("%d %d\n", B, A);
+//    }
+//
+//    return 0;
+//}
+
+//打印乘法口诀表。
+//#include <stdio.h>
+//
+//int main() {
+//    int n, i, j;
+//
+//    // 读取输入
+//    scanf("%d", &n);
+//
+//    // 打印乘法口诀表
+//    for (i = 1; i <= n; i++) {
+//        for (j = 1; j <= i; j++) {
+//            printf("%d*%d=%-2d  ", j, i, j * i);
+//        }
+//        printf("\n");
+//    }
+//
+//    return 0;
+//}
+
+//求矩阵各行最大元素值
+//#include <stdio.h>
+//
+//int main() {
+//    int m, n;
+//    int i, j;
+//    int matrix[6][6]; // 最大矩阵大小为6x6
+//
+//    // 读取输入
+//    scanf("%d %d", &m, &n);
+//    for (i = 0; i < m; i++) {
+//        for (j = 0; j < n; j++) {
+//            scanf("%d", &matrix[i][j]);
+//        }
+//    }
+//
+//    // 找到每行的最大值并输出
+//    for (i = 0; i < m; i++) {
+//        int max_value = matrix[i][0]; // 假设当前行的第一个元素是最大值
+//        int max_col = 0; // 最大值的列号
+//
+//        for (j = 1; j < n; j++) {
+//            if (matrix[i][j] > max_value) {
+//                max_value = matrix[i][j];
+//                max_col = j;
+//            }
+//        }
+//
+//        // 输出最大值及其位置（行号和列号从1开始）
+//        printf("%d %d %d\n", max_value, i + 1, max_col + 1);
+//    }
+//
+//    return 0;
+//}
+
+//sdut-C语言-计算A-B（顺序结构）
+//#include <stdio.h>
+//
+//int main() {
+//    int A, B;
+//
+//    // 读取两个整数
+//    scanf("%d %d", &A, &B);
+//
+//    // 计算并输出A和B的差
+//    printf("%d\n", A - B);
+//
+//    return 0;
+//}
+
+//sdut-C语言实验-虎子算电费
+//#include <stdio.h>
+//
+//int main() {
+//    double electricity, cost;
+//
+//    // 读取月用电量
+//    scanf("%lf", &electricity);
+//
+//    // 检查用电量是否有效
+//    if (electricity < 0) {
+//        printf("Invalid Value!\n");
+//    } else {
+//        // 计算电费
+//        if (electricity <= 50) {
+//            cost = electricity * 0.53;
+//        } else {
+//            cost = 50 * 0.53 + (electricity - 50) * (0.53 + 0.05);
+//        }
+//        // 输出电费，保留两位小数
+//        printf("cost = %.2f\n", cost);
+//    }
+//
+//    return 0;
+//}
+
+//sdut- C语言实验-计算1到n的和（循环结构）
+//#include <stdio.h>
+//
+//int main() {
+//    int n, sum = 0;
+//
+//    // 从键盘读取整数n
+//    scanf("%d", &n);
+//
+//    // 计算1到n的和
+//    for (int i = 1; i <= n; i++) {
+//        sum += i;
+//    }
+//
+//    // 输出1到n的和
+//    printf("%d\n", sum);
+//
+//    return 0;
+//}
+
+//成绩转换
+//#include <stdio.h>
+//
+//int main() {
+//    int score;
+//
+//    // 读取百分制成绩
+//    scanf("%d", &score);
+//
+//    // 根据分数范围转换为五分制成绩
+//    if (score >= 90) {
+//        printf("A\n");
+//    } else if (score >= 80) {
+//        printf("B\n");
+//    } else if (score >= 70) {
+//        printf("C\n");
+//    } else if (score >= 60) {
+//        printf("D\n");
+//    } else {
+//        printf("E\n");
+//    }
+//
+//    return 0;
+//}
+
+//Hello World!
+//#include <stdio.h>
+//
+//int main() {
+//    // 输出短句 "Hello World!"
+//    printf("Hello World!\n");
+//
+//    return 0;
+//}
+
+// 单选题：
+//以下能正确定义数组并正确赋初值的语句是（）。
+//int d[3][2]={{1, 2},{34}};
+//二维数组可以只给部分元素赋值，未赋值的元素默认为0。
+//int main() {
+//    char ch;
+//    scanf("%c", &ch);
+//    if (('a' <= ch <= 'z') || ('A' <= ch <= 'Z'));
+//    {
+//        printf("Y\n");}
+//        else{
+//            printf("N\n");
+//        }
+//    }
+//// 逻辑错误：应该是('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z')
+//#include "stdio.h"
+//int a=0, b=0, m=0, n=0;
+//int main() {
+//    (m = a == b) || (n = b == a);
+////    || 是逻辑或运算符，具有短路特性：
+//// 如果左边的表达式为真，整个表达式的结果已经确定为真，右边的表达式不会执行。
+//// 因此，当 a == b 为真时，n 不会被赋值，n 仍为 0。
+//
+//    printf("%d %d\n", m, n);
+//}
+// 运算符的优先级：
+// “括单算、移关相、罗夫逗”
+
+//int main() {
+//    char c = '\72';
+//    printf("%s\n", c);
+//}
+//\72 是一个八进制转义序列，表示字符的ASCII值为 72（八进制）。
+//72（八进制） = 7 * 8^1 + 2 * 8^0 = 58（十进制）
+//十进制 58 对应的ASCII字符是 :。
+//因此，char c = '\72'; 等价于：
+//char c = ':';
+
+//int main(void)
+//{
+//    int x = 1, a = 0, b = 0;
+//
+//    switch(x)
+//    {
+////        因为x=1，所以case 1:执行，a=1，b=0
+//        case 0:   b++;
+////        因为没有break，所以case 1:执行后继续执行case2，a=2，b=1
+//        case 1:   a++;
+//        case 2:   a++; b++;
+//    }
+//    printf("a=%d,b=%d\n",a,b);
+//
+//    return 0;
+//}
+
+//已知“int i=1;”，执行语句“while (i++<4);”后，变量i的值为
+//int main(){
+//
+//    int i = 1;
+//    while(i++<4);
+//    printf("%d\n",i);
+//    return 0;
+//}
+
+//A.int a[1][4]={1,2,3,4,5};
+//B.float x[3][]={{1},{2},{3}};
+//C.int b[2][3]={{1},{1,2},{1,2,3}};
+//D.double c[][3]={0};
+//为什么D对而A不对?
+// A.是一个一行四列的二维数组，而传入了5个元素，产生数组越界。
+// D.行没有初始化，默认初始化为1，即一行三列的二维数组，因此能够正确定义。
+
+//若有定义“char s1[50], s2[50];”，则以下函数调用中，正确的是 _______。
+//A.scanf ("%s%s", &s1 , &s2);
+//B.gets(s1 , s2);
+//C.scanf ("%s%s", s1 , s2);
+//D.gets("%s%s",s1 , s2);
+// 数组名本身就是地址，不需要取地址符&，因此正确的是：A错误而C正确。
+
+//# include <stdio.h>
+//int main(){
+//    int a = 3;
+//    a+=a-=a*a;
+////    注意，a的值每执行一步都会变化，因此最后其实是-6=-6-6，a=-12
+//    printf("%d\n",a);
+//}
+
+//void fun(int a,  int b)
+//{   a=a+10;
+//// 这里的a是形参，不会影响实参的值
+//    b=b-20;
+//}
+//// 为什么输出结果是25, 55？
+//// 函数参数传递是值传递，即传递的是实参的值的副本，所以在函数内部修改形参的值不会影响实参的值。
+//int main( )
+//{   int a=25,  b=55;
+////  这里是实参，传递的是实参的值，不受函数内部形参的影响
+//    因为只能实参传递给形参，不能形参传递给实参
+//    fun(a, b);
+//    printf("%d, %d",  a, b );
+//    return 0;
+//}
+
+//若有声明“char a[5]={ 'A', 'B', 'C', 'D', 'E'}, *p=a, i;”，则以下语句中不能正确输出a数组全部元素值的是        。
+//A.for(i=0; i<5; i++) printf("%c", a[i]);
+//B.for(i=0; i<5; i++) printf("％c", *(a+i));
+//C.for(i=0; i<5; i++) printf("％c", *p++);
+//D.for(i=0; i<5; i++) printf("％c", *a++);
+// 不能对数组名进行自增操作，因此D错误。
+
+//按如下方式定义二维数组并初始化：
+//int a[][4] = {1,2,3,4,5,6,7,8,9,10,11,12};
+//则元素a[1][3]和a[2][1]的值分别为（  ）。
+// 二维数组a的定义和初始化是正确的，a是一个3行4列的二维数组。
+// 注意，二维数组的行若未定义，并不是默认初始化为1，而是根据初始化的元素个数确定行数。
+// 比如这里的a有4列，共12个元素，因此行数为12/4=3。
+
+//int main() {
+//    int score = 87;
+//    char grade = 'A';
+//    switch (score / 10) {
+//        case 7:
+//            grade += 1;
+//// 注意，switch语句中没有break，所以case 8执行后继续执行case 9，grade=‘B’
+//        case 8:
+//            grade += 1;
+//        case 9:
+//            grade += 1;
+////  所以最后grade=‘A’+1+1=‘C’
+//    }
+//    printf("%c\n", grade);
+//}
+
+//struct student{
+//    int num;
+//    char name[20];
+//};
+//直接使用student 作为类型名是不对的，
+//需要使用struct关键字 + 类型名的方式定义结构体类型。
+//问题：student s; 缺少 struct 关键字，导致编译错误。
+//
+//正确定义结构体的方式：
+//使用 struct 关键字定义变量：struct student s;
+//使用 typedef 定义类型别名：typedef struct { ... } student;
+//定义结构体时同时定义变量：struct student { ... } s;
+//使用匿名结构体：struct { ... } s;
+
+//struct SID
+//{
+//    char name [20];
+//    int age;
+//    char sex;
+//}students[10],stu;
+//A.scanf("%s", students[0].name);
+//B.scanf("%d", &students[0].age);
+//C.scanf("%s", &stu.name);
+// 由于name是一个字符数组，不需要取地址符&，因此A正确，C错误。
+//D.scanf("%c", &stu.sex）;
+
+//int n=2,*p=&n,*q=p,则以下非法的赋值语句是: （ ）。
+//A.p=q
+//B.*p=*q
+//C.n=*q
+//D.p=n
+//存储类型	作用域	     生命周期	     初始化行为
+//extern	跨文件全局变量	 整个程序运行期间	 不能初始化，只能在定义处初始化
+//auto	    局部变量	     函数调用期间	     可以初始化
+//register	局部变量	     函数调用期间	     可以初始化
+//static	局部或全局变量	 整个程序运行期间	 可以初始化，未初始化时自动初始化为 0
+
+//int main(){
+//for (i=5;i;i--);//外循环体
+//    for (j=0;j<4;j++);//内循环体
+//}
+//嵌套循环执行的总次数取乘积：
+// 外循环体执行5次，内循环体执行4次，总共执行5*4=20次。
+
+//#include<stdio.h>
+//int main()
+//{ int a[4][4]={0,1,2,0,1,0,0,4,2,0,0,5,0,4,5,0},j;
+//    for(j=0;j<4;j++) printf("%2d",a[2][j]);
+//    return 0;
+//}
+//输出结果是：2 0 0 5：a[2][j]:从第三行开始，输出第三行的所有元素。
+
+//void  main( )
+//{ int i=0;
+//    while(i<10)
+//    {if(i<1)continue;// 始终为真，所以一直执行continue，i不会自增，导致死循环
+//        if(i==5)break;
+//        i++;
+//    }
+//}
+
+//int a[3][2]={1, 2, 3, 4, 5, 6}
+//数组 int a[3][2] = {1, 2, 3, 4, 5, 6}; 的初始化方式是按行优先，即先填充第一行，再填充第二行，最后填充第三行。数组的存储结构如下：
+
+// 三行两列的二维数组a结构如下（C语言的二维数组都是行主序存储）：
+//行号	 列0 列1
+// 0	 1	 2
+// 1	 3	 4
+// 2	 5	 6
+//因此，a[3][2]的位置是行号2列号1，值是6。
+//常量 25 的字长为4字节（int 类型一般都是4字节）
+
+//#include<stdio.h>
+//int main( )
+//{    int i,j,x=0;
+//    for (i=0;i<2;i++)
+//    {     x++;
+//        for(j=0;j<3;j++)
+//        {   if (j%2) continue;
+//            x++;
+//        }
+//        x++;
+//    }
+//    printf("x=%d",x);
+//
+//    return 0;
+//}
+//#include<stdio.h>
+//int main()
+//{    int x=10,y=10,i;
+//    for(i=0;x>8;y=++i)
+//        printf("%d,%d  ",x--,y);
+//    return 0;
+//}
+
